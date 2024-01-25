@@ -16,4 +16,7 @@ public class InputView {
         return Arrays.asList(str.split(","));
     }
 
+    public char readCommand() {
+        return scanner.next().charAt(0);
+    }
 }
