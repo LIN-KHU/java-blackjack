@@ -37,5 +37,6 @@ public class ParticipantController {
         for (Participant player : playerList) {
             output.printPlayerCardList(player);
         }
+        output.printNewLine();
     }
 }
