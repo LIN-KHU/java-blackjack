@@ -15,6 +15,15 @@ public class GameController {
         this.output = output;
     }
 
-
+    public void DrewNewCard(Participant player, Deck deck) {
+        while (true){
+            output.printAskIfDrawNewCardMessage(player);
+            if (input.readCommand() == 'n') {
+                break;
+            }
+            player.getNewCard(deck);
+        }
+        output.printPlayerCardList(player);
+    }
 
 }

@@ -20,6 +20,9 @@ public class Game {
         List<Participant> playerlist = participant.setPlayer();
         setInitialCard(playerlist, dealer);
         participant.printCardList(playerlist, dealer);
+        for (Participant player : playerlist) {
+            game.DrewNewCard(player, deck);
+        }
     }
 
     public void setInitialCard(List<Participant> playerlist, Participant dealer) {
