@@ -12,4 +12,9 @@ public class OutputView {
     void printCardSharedMessage(ArrayList<String> playerList) {
         System.out.println("딜러와 " + String.join(", ",playerList) + "에게 2장을 나누었습니다.");
     }
+
+    void printDealerGetNewCardMessage() {
+        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+    }
+
 }
