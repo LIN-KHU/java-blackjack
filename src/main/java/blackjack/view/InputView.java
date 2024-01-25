@@ -12,7 +12,7 @@ public class InputView {
         this.scanner = scanner;
     }
     public List<String> readPlayerName() {
-        String str = scanner.next();
+        String str = scanner.nextLine();
         return Arrays.asList(str.split(","));
     }
 
