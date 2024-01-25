@@ -25,8 +25,16 @@ public class OutputView {
         System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
     }
 
-    public void printCardList(Participant participant) {
+    public void printPlayerCardList(Participant participant) {
+        System.out.println(participant.getName()+"카드: "+String.join(", ", participant.getCardNameList()));
+    }
+
+    public void printDealerInitialCardList(Participant participant) {
         System.out.println(participant.getName()+": "+String.join(", ", participant.getCardNameList()));
+    }
+
+    public void printDealerResultCardList(Participant participant) {
+        System.out.println(participant.getName()+" : "+String.join(", ", participant.getCardNameList()));
     }
 
     void printAskIfDrawNewCardMessage(Participant player) {

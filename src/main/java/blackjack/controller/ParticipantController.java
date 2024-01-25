@@ -33,9 +33,9 @@ public class ParticipantController {
 
     public void printCardList(List<Participant> playerList, Participant dealer) {
         output.printCardSharedMessage(playerList);
-        output.printCardList(dealer);
+        output.printDealerInitialCardList(dealer);
         for (Participant player : playerList) {
-            output.printCardList(player);
+            output.printPlayerCardList(player);
         }
     }
 }
