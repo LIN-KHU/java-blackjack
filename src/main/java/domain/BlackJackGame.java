@@ -19,7 +19,7 @@ public class BlackJackGame {
 
     public void play() {
        startPhase();
-
+       playPhase();
 
     }
 
@@ -33,8 +33,12 @@ public class BlackJackGame {
             player.receiveCard(cardDeck.draw());
         }
     }
-
-    public void playerPhase(Player player) {
+    public void playPhase(){
+        for (Player player : players){
+            eachPlayerPhase(player);
+        }
+    }
+    public void eachPlayerPhase(Player player) {
         String answer = "";
         while(answer != "n" || player.getScore() <= 21){
             answer = input.readGetCardMoreOrNot(player.getPlayerName());
