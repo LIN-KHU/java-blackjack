@@ -38,4 +38,8 @@ public class Card {
         return number;
     }
 
+    public int getNumber(){
+        return number;
+    }
+
 }
