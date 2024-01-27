@@ -1,9 +1,10 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardGenerator {
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
     private static final String[] PATTERNS = {"스페이드", "하트", "클로버", "다이아몬드"};
     private static final int MAX_INDEX = 13;
 

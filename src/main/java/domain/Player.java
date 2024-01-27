@@ -1,6 +1,25 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
-    private
-    private
+    private final String playerName;
+    private final List<Card> playerCardList = new ArrayList<>();
+
+    public Player(String playerName){
+        this.playerName = playerName;
+    }
+
+    public void receiveCard(Card receivedCard){
+        playerCardList.add(receivedCard);
+    }
+
+    public String getPlayerName(){
+        return this.playerName;
+    }
+
+    public List<Card> getPlayerCardList(){
+        return this.playerCardList;
+    }
 }
