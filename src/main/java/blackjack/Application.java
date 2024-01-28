@@ -27,11 +27,11 @@ public class Application {
                 Between16And21.SumBetween16And21(participant, entry, Cards);
             }
         }
-        String winner = DecideWinner.determineWinner(participantStates);
+        String winner = DecideResult.determineWinner(participantStates);
         System.out.println("## 최종 승패");
         System.out.println("딜러: ");
         for (String participant : participants) {
-            System.out.println(participant + ": " + );
+            System.out.println(participant + ": "  );
         }
 
     }
