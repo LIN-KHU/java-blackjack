@@ -4,6 +4,8 @@ import domain.BlackJackGame;
 import view.input.InputView;
 import view.output.ResultView;
 
+import java.util.List;
+
 public class BlackJackController {
 
     private final InputView inputView;
@@ -16,6 +18,19 @@ public class BlackJackController {
     }
 
     public void start(){
+
+    }
+
+    public void makeBlackJackGame(List<String> playerNames){
+        this.blackJackGame = new BlackJackGame(playerNames);
+    }
+    public void startBlackJackGame(){
+        blackJackGame.startPhase();
+        blackJackGame.playPhase(inputView.readGetCardMoreOrNot());
+        blackJackGame.dealerPhase();
+    }
+
+    public void showResultBlackJackGame(){
 
     }
 }
