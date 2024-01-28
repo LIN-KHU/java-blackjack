@@ -6,8 +6,9 @@ import java.util.List;
 public class Player {
     private final String playerName;
     private final List<Card> playerCardList = new ArrayList<>();
-
     private int score = 0;
+    private boolean winOrNot = false;
+
     public Player(String playerName){
         this.playerName = playerName;
     }
@@ -32,5 +33,8 @@ public class Player {
         for (Card card : playerCardList){
             score += card.getNumber();
         }
+    }
+    public void isWinner(){
+        this.winOrNot = true;
     }
 }
