@@ -36,4 +36,23 @@ public class Between16And21 {
             }
         }
     }
+
+    public static void DealerBetween16And21(String Dealer, Map.Entry<String, CardGameSimulator.ParticipantState> DealerEntry, Map<String, List<Integer>> Cards) {
+        CardGameSimulator.ParticipantState DealerState = DealerEntry.getValue();
+        int sum = DealerState.getSum(Cards);
+
+        while(true) {
+            if (sum > 21 || (16 < sum && sum <= 21)) {
+                break;
+            }
+
+            if (sum < 16) {
+                Map.Entry<String, Integer> extraCard = CardGameSimulator.getRandomCard(Cards);
+                int extraCardValue = extraCard.getValue();
+                String extraCardName = extraCard.getKey();
+                DealerState.updateSumAndNameList(extraCardValue, extraCardName); //DealerEntry<name, Map<String, CardGameSimulator.ParticipantState>
+                break;
+            }
+        }
+    }
 }
