@@ -14,4 +14,12 @@ public class Card {
     public String toString() {
         return this.cardRank.getValue() + this.cardSuit.getValue();
     }
+
+    public CardSuit getCardSuit() {
+        return this.cardSuit;
+    }
+
+    public CardRank getCardRank() {
+        return this.cardRank;
+    }
 }
