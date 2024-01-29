@@ -22,26 +22,46 @@ public class OutputView {
     }
 
     public void printDealerGetNewCardMessage() {
-        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+        System.out.println("\n딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
     }
 
     public void printPlayerCardList(Participant participant) {
-        System.out.println(participant.getName()+"카드: "+String.join(", ", participant.getCardNameList()));
+        System.out.print(participant.getName()+"카드: "+String.join(", ", participant.getCardNameList()));
     }
 
     public void printDealerInitialCardList(Participant participant) {
-        System.out.println(participant.getName()+": "+String.join(", ", participant.getCardNameList()));
+        System.out.print(participant.getName()+": "+String.join(", ", participant.getCardNameList()));
     }
 
     public void printDealerResultCardList(Participant participant) {
-        System.out.println(participant.getName()+" : "+String.join(", ", participant.getCardNameList()));
+        System.out.print(participant.getName()+" : "+String.join(", ", participant.getCardNameList()));
     }
 
     public void printAskIfDrawNewCardMessage(Participant player) {
-        System.out.println(player.getName() + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
+        System.out.println(player.getName() + " 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
     }
 
     public void printNewLine() {
         System.out.println();
+    }
+
+    public void printScore(int score) {
+        System.out.println(" - 결과: " + Integer.toString(score));
+    }
+
+    public void printResult(Participant participant) {
+        System.out.println(participant.getName()+": "+participant.getWin());
+    }
+
+    public void printDealerResult(Participant dealer, int playerNumber) {
+        System.out.println(dealer.getName()+": "+dealer.getWin()+"승 "+(playerNumber - dealer.getWin())+"패");
+    }
+
+    public void printPlayerWinResult(Participant player) {
+        System.out.println(player.getName() + ": " + "승");
+    }
+
+    public void printPlayerLoseResult(Participant player) {
+        System.out.println(player.getName() + ": " + "패");
     }
 }
