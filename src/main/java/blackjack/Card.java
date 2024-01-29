@@ -34,7 +34,7 @@ public class Card {
                  * 2. j == 9,10,11 인 경우(J,Q,K) 10
                  * */
 
-                cardMap.put(cardArray[i][j], j + 1);
+                cardMap.put(cardArray[i][j], getCardNumber(j));
 
                 cardArray[i][j] = null;
                 break;
@@ -42,5 +42,12 @@ public class Card {
         }
 
         return cardMap;
+    }
+
+    private int getCardNumber(int index){
+        if(index == 9 || index == 10 || index == 11){
+            return 10;
+        }
+        return index + 1;
     }
 }
