@@ -50,4 +50,7 @@ public class OutputView {
             System.out.println(player.getName() + ": " + player.getGameResult());
         }
     }
+    public void printSumCardNumberOver() {
+        System.out.println(SUM_CARD_NUMBER_OVER);
+    }
 }
