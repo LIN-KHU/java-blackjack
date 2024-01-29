@@ -48,6 +48,7 @@ public class Application {
         }
 
         //게임 종료 - 결과 출력, 기준 : 한 게임 끝나면
+        OutputView.printResultSum(dealer, playerList);
 
         //최종 승패
 

@@ -31,10 +31,18 @@ public class OutputView {
     }
 
     public static void printDrawDealerCardMessage() {
-        System.out.println("\n딜러는 16이하라 한장의 카드를 더 받았습니다.");
+        System.out.println("\n딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
     }
     public static void printNotDrawDealerCardMessage() {
-        System.out.println("\n딜러는 16초과라 카드를 뽑지 않습니다.");
+        System.out.println("\n딜러는 16초과라 카드를 뽑지 않습니다.\n");
+    }
+
+    public static void printResultSum(Dealer dealer, PlayerList playerList) {
+        System.out.println(dealer + " - 결과: " + dealer.getCardList().getSum());
+        for (Player player : playerList.getPlayerList()) {
+            System.out.println(player + " - 결과: " + player.getCardList().getSum());
+        }
+        System.out.println("");
     }
 
 }

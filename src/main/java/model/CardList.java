@@ -35,6 +35,10 @@ public class CardList {
 
     public void addCard() {
         cardList.add(new Card());
-        calculateSum(cardList);
+        updateSum();
+    }
+
+    public void updateSum() {
+        this.sum = calculateSum(this.cardList);
     }
 }
