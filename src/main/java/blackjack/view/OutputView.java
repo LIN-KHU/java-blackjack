@@ -34,7 +34,7 @@ public class OutputView {
     }
 
     public void printDealerResultCardList(Participant participant) {
-        System.out.print(participant.getName()+" 카정: "+String.join(", ", participant.getCardNameList()));
+        System.out.print(participant.getName()+" 카드: "+String.join(", ", participant.getCardNameList()));
     }
 
     public void printAskIfDrawNewCardMessage(Participant player) {
