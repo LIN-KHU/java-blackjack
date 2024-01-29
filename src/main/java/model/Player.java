@@ -6,21 +6,11 @@ import java.util.stream.Collectors;
 
 public class Player {
     private String name;
-    private List<Card> cardList;
+    private CardList cardList;
 
     public Player(String name) {
         this.name = name;
-        this.cardList = initCardList();
-    }
-
-    /*
-        코드 중복- 수정 필요
-     */
-    public List<Card> initCardList() {
-        List<Card> cardList = new ArrayList<>();
-        cardList.add(new Card());
-        cardList.add(new Card());
-        return cardList;
+        this.cardList = new CardList();
     }
 
     public String getName() {
@@ -32,9 +22,9 @@ public class Player {
      */
     @Override
     public String toString() {
-        String cards = cardList.stream()
+        String cards = cardList.getCardList().stream()
                 .map(Card::toString)
                 .collect(Collectors.joining(", "));
-        return name + "카드:" + cards;
+        return name + "카드: " + cards;
     }
 }

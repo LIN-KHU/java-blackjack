@@ -19,6 +19,14 @@ public class OutputView {
         for (Player player : playerList.getPlayerList()) {
             System.out.println(player);
         }
+        System.out.println("");
+    }
+
+    public static void printDrawDealerCardMessage() {
+        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+    }
+    public static void printNotDrawDealerCardMessage() {
+        System.out.println("딜러는 16초과라 카드를 뽑지 않습니다.");
     }
 
 }
