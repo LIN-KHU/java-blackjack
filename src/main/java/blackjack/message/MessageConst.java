@@ -10,5 +10,6 @@ public class MessageConst {
     public static final String FINAL_WINNER = "##최종승패";
     public static final String WIN = "승";
     public static final String LOSE = "패";
+    public static final String SUM_CARD_NUMBER_OVER = "카드 숫자의 합이 21을 초과하였습니다.\n";
 
 }
