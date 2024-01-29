@@ -15,8 +15,9 @@ public class ParticipantList {
     }
 
     public List<Participant> getParticipantList() {
-        this.participantList = new ArrayList<Participant>(playerList.getPlayerList());
+        this.participantList = new ArrayList<Participant>();
         this.participantList.add(dealer);
+        participantList.addAll(playerList.getPlayerList());
         return this.participantList;
     }
 
