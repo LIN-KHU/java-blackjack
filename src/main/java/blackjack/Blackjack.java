@@ -67,7 +67,11 @@ public class Blackjack {
                 if (playerStayOrHitState == "y") {
                     player.getCard(card.getCard());
                     player.printCard();
-                    i--;
+                    if(player.getSumCardNumber() < 22){
+                        i--;
+                    } else {
+                        outputView.printSumCardNumberOver();
+                    }
                     break;
                 } else if (playerStayOrHitState == "n") {
                     player.printCard();
