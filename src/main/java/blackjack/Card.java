@@ -10,11 +10,14 @@ public class Card {
         this.cardScore = name.charAt(0);
     }
 
-    public int getCardScore() {
+    public char getCardScore() {
         return cardScore;
     }
 
     public String getCardName() {
         return cardName;
     }
+
+    public boolean checkIfNumeric() { return (cardScore >= '2' && cardScore <= '9'); }
+    public boolean checkIfAce() { return (cardScore == 'A'); }
 }
