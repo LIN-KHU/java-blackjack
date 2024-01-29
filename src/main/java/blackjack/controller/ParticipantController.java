@@ -39,7 +39,7 @@ public class ParticipantController {
     }
 
     public void checkDealer(Participant dealer, Deck deck) {
-        dealer.setScore();
+        dealer.calculateScore();
         if (dealer.getScore() <= 17) {
             output.printDealerGetNewCardMessage();
             dealer.getNewCard(deck);

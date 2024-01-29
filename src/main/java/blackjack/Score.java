@@ -4,15 +4,26 @@ import java.util.List;
 
 public class Score {
 
-    public int setScore(List<Card> cardList) {
-        int score = 0;
-        for (Card card : cardList) {
-            score += CardScore(card);
-        }
+    private int score;
+
+    public Score() {
+        this.score = 0;
+    }
+    public int getScore() {
         return score;
     }
 
-    public int CardScore(Card card) {
+    public void setScore(int number) {
+        this.score = number;
+    }
+
+    public void calculate(List<Card> cardList) {
+        for (Card card : cardList) {
+            this.score += checkCardScore(card);
+        }
+    }
+
+    public int checkCardScore(Card card) {
         if (card.checkIfNumeric()) {
             return card.getCardScore() - '0';
         }

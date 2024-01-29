@@ -6,18 +6,20 @@ public class Participant {
 
     private final String name;
     private final List<Card> cardList;
-    private int score;
+    private final Score score;
     private int win;
 
     public Participant() {
         this.name = "딜려";
         this.cardList = new ArrayList<Card>();
-        this.score = 0;
+        this.score = new Score();
         this.win = 0;
     }
     public Participant(String name) {
         this.name = name;
         this.cardList = new ArrayList<Card>();
+        this.score = new Score();
+        this.win = 0;
     }
 
     public String getName() {
@@ -40,16 +42,15 @@ public class Participant {
         cardList.add(new Card(deck.getNewCard()));
     }
 
-    public void setScore() {
-        Score sc = new Score();
-        this.score = sc.setScore(cardList);
+    public void calculateScore() {
+        score.calculate(cardList);
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setScore(int number) {
+        score.setScore(number);
     }
     public int getScore() {
-        return this.score;
+        return score.getScore();
     }
 
     public int getWin() {
