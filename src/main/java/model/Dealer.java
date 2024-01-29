@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Player {
-    private String name;
+public class Dealer {
     private List<Card> cardList;
 
-    public Player(String name) {
-        this.name = name;
+    public Dealer() {
         this.cardList = initCardList();
     }
 
     /*
-        코드 중복- 수정 필요
+        코드 중복 - 수정
      */
     public List<Card> initCardList() {
         List<Card> cardList = new ArrayList<>();
@@ -23,18 +21,11 @@ public class Player {
         return cardList;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    /*
-        playerlist에 있는 메서드와 구분 필요
-     */
     @Override
     public String toString() {
         String cards = cardList.stream()
                 .map(Card::toString)
                 .collect(Collectors.joining(", "));
-        return name + "카드:" + cards;
+        return "딜러: " + cards;
     }
 }
