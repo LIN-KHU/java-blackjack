@@ -1,4 +1,4 @@
-package domain;
+package domain.carddeck;
 
 public enum CardRank {
 
