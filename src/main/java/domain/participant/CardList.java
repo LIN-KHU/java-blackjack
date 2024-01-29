@@ -7,7 +7,8 @@ import java.util.List;
 
 public class CardList {
 
-    List<Card> cardList;
+    private List<Card> cardList;
+    private int score;
 
     public CardList() {
         this.cardList = new ArrayList<Card>();
@@ -19,5 +20,13 @@ public class CardList {
 
     public List<Card> getCardList() {
         return this.cardList;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 }

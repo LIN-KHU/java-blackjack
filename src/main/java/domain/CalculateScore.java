@@ -3,6 +3,7 @@ package domain;
 import domain.carddeck.Card;
 import domain.carddeck.CardRank;
 import domain.carddeck.CardRankConverter;
+import domain.constants.Constant;
 import domain.participant.CardList;
 import domain.participant.Participant;
 
@@ -10,13 +11,14 @@ import java.util.List;
 
 public class CalculateScore {
 
-    private final int targetScore = 21;
     private CardRankConverter cardRankConverter = new CardRankConverter();
 
 
     public int calculator(Participant participant) {
         int sumExceptAce = calculatorExceptAce(participant);
-        return calculatorContainsAce(participant, sumExceptAce);
+        int sum = calculatorContainsAce(participant, sumExceptAce);
+        participant.getCardList().setScore(sum);
+        return sum;
     }
 
     private int calculatorExceptAce(Participant participant) {
@@ -42,7 +44,7 @@ public class CalculateScore {
 
     private int addOneOrEleven(int sum) {
         sum += 1;
-        if (sum + 11 <= targetScore) {
+        if (sum + 11 <= Constant.TARGET_SCORE) {
             sum += 10;
         }
         return sum;
