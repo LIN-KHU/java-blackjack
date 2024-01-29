@@ -25,6 +25,17 @@ public class Dealer {
         List<Integer> cardNumberList = new ArrayList<>();
         cardNumberList.addAll(cardList.values());
 
+        List<String> cardNameList = new ArrayList<>();
+        cardNameList.addAll(cardList.keySet());
+
+        for(String cardName: cardNameList){
+            if(cardName.contains("A")){
+                if(Math.abs(21 - getSumCardNumber()) > Math.abs(21 - getSumCardNumber() +10)){
+                    cardList.replace(cardName, 11);
+                }
+            }
+        }
+
         for(int number: cardNumberList){
             sum += number;
         }
