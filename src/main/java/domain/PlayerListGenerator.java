@@ -3,16 +3,19 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerList {
+public class PlayerListGenerator {
     private List<Player> playerList;
 
-    public PlayerList() {
-        this.playerList = new ArrayList<Player>();
+    public PlayerListGenerator(String playerNameStr) {
+        generatePlayerList(playerNameStr);
     }
 
-    public void generatePlayerList(String playerNameStr) {
+    private void generatePlayerList(String playerNameStr) {
         String[] playerNameList = playerNameStr.split(",");
         validateDuplicatedPlayerName(playerNameList);
+
+        this.playerList = new ArrayList<Player>();
+
         for (String playerName : playerNameList) {
             Player player = new Player(playerName.trim());
             this.playerList.add(player);
