@@ -34,7 +34,7 @@ public class OutputView {
     }
 
     public void printDealerResultCardList(Participant participant) {
-        System.out.print(participant.getName()+" 카드: "+String.join(", ", participant.getCardNameList()));
+        System.out.print(participant.getName()+" 카정: "+String.join(", ", participant.getCardNameList()));
     }
 
     public void printAskIfDrawNewCardMessage(Participant player) {
@@ -53,8 +53,8 @@ public class OutputView {
         System.out.println(participant.getName()+": "+participant.getWin());
     }
 
-    public void printDealerResult(Participant dealer, int playerNumber) {
-        System.out.println(dealer.getName()+": "+dealer.getWin()+"승 "+(playerNumber - dealer.getWin())+"패");
+    public void printDealerResult(Participant dealer, int dealerLose) {
+        System.out.println(dealer.getName()+": "+dealer.getWin()+"승 "+(dealerLose)+"패");
     }
 
     public void printPlayerWinResult(Participant player) {

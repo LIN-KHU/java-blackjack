@@ -44,18 +44,18 @@ public class Game {
         }
     }
     public void setScore(List<Participant> playerList) {
-        dealer.setScore();
+        dealer.calculateScore();
         for (Participant player : playerList) {
-            player.setScore();
-            for (Card card : player.getCardList()) {
-                checkPlayerAce(card, player);
-            }
+            player.calculateScore();
+            checkPlayerAce(player);
         }
     }
 
-    private void checkPlayerAce(Card card, Participant player) {
-        if (card.checkIfAce() && player.getScore() > 21) {
-            player.setScore(player.getScore() - 10);
+    private void checkPlayerAce(Participant player) {
+        for (Card card : player.getCardList()) {
+            if (card.checkIfAce() && player.getScore() > 21) {
+                player.setScore(player.getScore() - 10);
+            }
         }
     }
 

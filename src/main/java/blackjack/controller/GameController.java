@@ -22,11 +22,15 @@ public class GameController {
                 break;
             }
             player.getNewCard(deck);
+            printPlayerCardList(player);
         }
+        printPlayerCardList(player);
+    }
+
+    private void printPlayerCardList(Participant player) {
         output.printPlayerCardList(player);
         output.printNewLine();
     }
-
     public void printScore(Participant dealer, List<Participant> playerList) {
         output.printDealerResultCardList(dealer);
         output.printScore(dealer.getScore());
@@ -38,7 +42,7 @@ public class GameController {
 
     public void printResult(Participant dealer, List<Participant> playerList) {
         output.printNewLine();
-        output.printDealerResult(dealer, playerList.size());
+        output.printDealerResult(dealer, playerList.size() - dealer.getWin());
         for (Participant player : playerList) {
             checkIfPlayerWin(player);
             checkIfPlayerLose(player);
