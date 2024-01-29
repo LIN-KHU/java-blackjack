@@ -8,27 +8,28 @@ public class Game {
     private final GameController game;
     private final ParticipantController participant;
     private final Deck deck;
+    private final Participant dealer;
 
     public Game(ParticipantController participant,GameController game) {
         this.participant = participant;
         this.game = game;
         this.deck  = new Deck();
+        this.dealer = new Participant();
     }
 
     public void doGame() {
-        Participant dealer = participant.setDealer();
         List<Participant> playerlist = participant.setPlayer();
-        setInitialCard(playerlist, dealer);
+        setInitialCard(playerlist);
         participant.printCardList(playerlist, dealer);
         getNewCardPlayer(playerlist);
         participant.checkDealer(dealer, deck);
-        setScore(dealer, playerlist);
-        getResult(dealer, playerlist);
+        setScore(playerlist);
+        getResult(playerlist);
         game.printScore(dealer,playerlist);
         game.printResult(dealer,playerlist);
     }
 
-    public void setInitialCard(List<Participant> playerlist, Participant dealer) {
+    public void setInitialCard(List<Participant> playerlist) {
         for (Participant player : playerlist) {
             player.getNewCard(deck);
             player.getNewCard(deck);
@@ -42,7 +43,7 @@ public class Game {
             game.DrewNewCard(player, deck);
         }
     }
-    public void setScore(Participant dealer, List<Participant> playerList) {
+    public void setScore(List<Participant> playerList) {
         dealer.setScore();
         for (Participant player : playerList) {
             player.setScore();
@@ -58,10 +59,10 @@ public class Game {
         }
     }
 
-    public static void getResult(Participant dealer, List<Participant> playerList) {
+    public void getResult(List<Participant> playerList) {
         int winner = 0;
         for (Participant player : playerList) {
-            if (checkIfPlayerWin(dealer, player)) {
+            if (checkIfPlayerWin(player)) {
                 winner++;
                 player.setWin(1);
             }
@@ -69,7 +70,7 @@ public class Game {
         dealer.setWin(playerList.size() - winner);
     }
 
-    private static boolean checkIfPlayerWin(Participant dealer, Participant player) {
+    private boolean checkIfPlayerWin(Participant player) {
         return (dealer.getScore() > 21) || (dealer.getScore() <= player.getScore());
     }
 }
