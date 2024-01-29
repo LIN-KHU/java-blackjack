@@ -34,9 +34,19 @@ public class ParticipantController {
     public void printCardList(List<Participant> playerList, Participant dealer) {
         output.printCardSharedMessage(playerList);
         output.printDealerInitialCardList(dealer);
+        output.printNewLine();
         for (Participant player : playerList) {
             output.printPlayerCardList(player);
+            output.printNewLine();
         }
         output.printNewLine();
+    }
+
+    public void checkDealer(Participant dealer, Deck deck) {
+        dealer.setScore();
+        if (dealer.getScore() <= 17) {
+            output.printDealerGetNewCardMessage();
+            dealer.getNewCard(deck);
+        }
     }
 }
