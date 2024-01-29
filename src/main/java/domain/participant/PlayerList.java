@@ -3,10 +3,10 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerListGenerator {
+public class PlayerList {
     private List<Player> playerList;
 
-    public PlayerListGenerator(String playerNameStr) {
+    public PlayerList(String playerNameStr) {
         generatePlayerList(playerNameStr);
     }
 
