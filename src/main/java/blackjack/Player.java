@@ -52,6 +52,14 @@ public class Player {
         cardNameList.addAll(cardList.keySet());
         String s = String.join(",", cardNameList);
 
+        for(String cardName: cardNameList){
+            if(cardName.contains("A")){
+                if(Math.abs(21 - getSumCardNumber()) > Math.abs(21 - getSumCardNumber() +10)){
+                    cardList.replace(cardName, 11);
+                }
+            }
+        }
+
         int sumCardNumber = getSumCardNumber();
         System.out.println(name + "카드: " + s + " - 결과: " + sumCardNumber);
     }
