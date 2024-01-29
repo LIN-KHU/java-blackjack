@@ -15,8 +15,8 @@ public class Application {
         String playerNames = InputView.inputPlayerName();
         List<String> playerNameList = Arrays.asList(playerNames.split(","));
         List<Player> players = playerNameList.stream()
-                                            .map(Player::new)
-                                            .collect(Collectors.toList());
+                .map(Player::new)
+                .collect(Collectors.toList());
         PlayerList playerList = new PlayerList(players);
         //게임 진행
         Dealer dealer = new Dealer();
@@ -25,20 +25,31 @@ public class Application {
         OutputView.printDealerAndPlayerCard(dealer, playerList);
         //2)카드 뽑기 - player, 딜러 순
         //player가 n 을 입력하면 현재 player의 카드를 보여주고 다음턴
-
+        for (Player player : playerList.getPlayerList()) {
+            while (true) {
+                OutputView.printDrawPlayerCardMessage(player);
+                String playerInput = InputView.inputPlayerMoreCard();
+                if (playerInput.equals("y")) {
+                    player.getCardList().addCard();
+                }
+                OutputView.printPlayerCard(player);
+                if (playerInput.equals("n")) {
+                    break;
+                }
+            }
+        }
         //딜러는 알아서 계산 후 출력
         if (dealer.getCardList().getSum() > 16) {
             OutputView.printNotDrawDealerCardMessage();
         }
-        if (dealer.getCardList().getSum() <=16) {
+        if (dealer.getCardList().getSum() <= 16) {
             OutputView.printDrawDealerCardMessage();
             dealer.getCardList().addCard();
         }
 
-        //게임 종료 - 결과 출력, 기준 :
+        //게임 종료 - 결과 출력, 기준 : 한 게임 끝나면
 
-        //최종 승패 - 딜러는 플레이어와 대결 느낌?
-
+        //최종 승패
 
 
     }

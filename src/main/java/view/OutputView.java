@@ -22,11 +22,19 @@ public class OutputView {
         System.out.println("");
     }
 
+    public static void printDrawPlayerCardMessage(Player player) {
+        System.out.println(player.getName() + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
+    }
+
+    public static void printPlayerCard(Player player) {
+        System.out.println(player);
+    }
+
     public static void printDrawDealerCardMessage() {
-        System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+        System.out.println("\n딜러는 16이하라 한장의 카드를 더 받았습니다.");
     }
     public static void printNotDrawDealerCardMessage() {
-        System.out.println("딜러는 16초과라 카드를 뽑지 않습니다.");
+        System.out.println("\n딜러는 16초과라 카드를 뽑지 않습니다.");
     }
 
 }

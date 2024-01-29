@@ -17,9 +17,13 @@ public class Player {
         return name;
     }
 
+    public CardList getCardList() {
+        return cardList;
+    }
+
     /*
-        playerlist에 있는 메서드와 구분 필요
-     */
+            playerlist에 있는 메서드와 구분 필요
+         */
     @Override
     public String toString() {
         String cards = cardList.getCardList().stream()

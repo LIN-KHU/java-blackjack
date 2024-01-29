@@ -8,4 +8,9 @@ public class InputView {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
+    public static String inputPlayerMoreCard() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 }
