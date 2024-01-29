@@ -19,16 +19,12 @@ public class ParticipantController {
 
     public List<Participant> setPlayer() {
         output.printInputPlayerNameMessage();
-        List<String> playerList = input.readPlayerName();
-        List<Participant> players = new ArrayList<Participant>();
-        for (String name : playerList) {
-            players.add(new Participant(name));
+        List<String> playerNameList = input.readPlayerName();
+        List<Participant> playerList = new ArrayList<Participant>();
+        for (String name : playerNameList) {
+            playerList.add(new Participant(name));
         }
-        return players;
-    }
-
-    public Participant setDealer() {
-        return new Participant();
+        return playerList;
     }
 
     public void printCardList(List<Participant> playerList, Participant dealer) {
