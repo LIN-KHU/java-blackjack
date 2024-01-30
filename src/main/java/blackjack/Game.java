@@ -2,7 +2,6 @@ package blackjack;
 
 import blackjack.controller.GameController;
 import blackjack.controller.ParticipantController;
-import java.util.List;
 
 public class Game {
     private final GameController game;
@@ -18,7 +17,7 @@ public class Game {
     }
 
     public void doGame() {
-        List<Participant> playerlist = participant.setPlayer();
+        PlayerList playerlist = participant.setPlayer();
         setInitialCard(playerlist);
         participant.printCardList(playerlist, dealer);
         getNewCardPlayer(playerlist);
@@ -29,8 +28,8 @@ public class Game {
         game.printResult(dealer,playerlist);
     }
 
-    public void setInitialCard(List<Participant> playerlist) {
-        for (Participant player : playerlist) {
+    public void setInitialCard(PlayerList playerlist) {
+        for (Participant player : playerlist.getPlayerList()) {
             player.getNewCard(deck);
             player.getNewCard(deck);
         }
@@ -38,14 +37,14 @@ public class Game {
         dealer.getNewCard(deck);
     }
 
-    private void getNewCardPlayer(List<Participant> playerList) {
-        for (Participant player : playerList) {
+    private void getNewCardPlayer(PlayerList playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             game.DrewNewCard(player, deck);
         }
     }
-    public void setScore(List<Participant> playerList) {
+    public void setScore(PlayerList playerList) {
         dealer.calculateScore();
-        for (Participant player : playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             player.calculateScore();
             checkPlayerAce(player);
         }
@@ -53,24 +52,23 @@ public class Game {
 
     private void checkPlayerAce(Participant player) {
         for (Card card : player.getCardList()) {
-            if (card.checkIfAce() && player.getScore() > 21) {
+            if (card.checkScoreIfAce() && player.getScore() > 21) {
                 player.setScore(player.getScore() - 10);
             }
         }
     }
 
-    public void getResult(List<Participant> playerList) {
-        int winner = 0;
-        for (Participant player : playerList) {
+    public void getResult(PlayerList playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             if (checkIfPlayerWin(player)) {
-                winner++;
-                player.setWin(1);
+                player.setWin();
+                continue;
             }
+            dealer.setWin();
         }
-        dealer.setWin(playerList.size() - winner);
     }
 
     private boolean checkIfPlayerWin(Participant player) {
-        return (dealer.getScore() > 21) || (dealer.getScore() <= player.getScore());
+        return (dealer.getScore() > 21) || (player.getScore() <= 21 && dealer.getScore() <= player.getScore());
     }
 }
