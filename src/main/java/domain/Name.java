@@ -9,8 +9,12 @@ public class Name {
 	}
 
 	private void validateName(String name) {
-		if(name == null || name.isEmpty()) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("1자 이상의 이름을 입력해주세요.");
 		}
+	}
+
+	public String getName() {
+		return name;
 	}
 }
