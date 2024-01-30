@@ -50,6 +50,7 @@ public class canReceiveCard {
     }
 
     static class Participant implements CardGameParticipant {
+        @Override
         public void playTurn(String participant, Map.Entry<String, blackjack.Participant.ParticipantState> participantEntry, Map<String, List<Integer>> Cards) {
 
         }
