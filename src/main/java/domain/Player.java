@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Player {
     private final String playerName;
-    private final List<Card> playerCardList = new ArrayList<>();
+    private final List<Card> playerCardList;
     private int score = 0;
     private boolean winOrNot = false;
 
     public Player(String playerName){
         this.playerName = playerName;
+        this.playerCardList = new ArrayList<>();
     }
 
     public void receiveCard(Card receivedCard){
