@@ -4,42 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 public class Participant {
 
-    private final String name;
-    private final List<Card> cardList;
+    private final ParticipantName name;
+    private final CardList cardList;
     private final Score score;
-    private int win;
+    private final Result result;
 
     public Participant() {
-        this.name = "딜려";
-        this.cardList = new ArrayList<Card>();
+        this.name = new ParticipantName("딜러");
+        this.cardList = new CardList();
         this.score = new Score();
-        this.win = 0;
+        this.result = new Result();
     }
     public Participant(String name) {
-        this.name = name;
-        this.cardList = new ArrayList<Card>();
+        this.name = new ParticipantName(name);
+        this.cardList = new CardList();
         this.score = new Score();
-        this.win = 0;
+        this.result = new Result();
     }
 
     public String getName() {
-        return name;
+        return name.getName();
     }
 
     public List<Card> getCardList() {
-        return cardList;
+        return cardList.getCardList();
     }
 
     public List<String> getCardNameList() {
         List<String> carNameList = new ArrayList<String>();
-        for (Card card : cardList) {
+        for (Card card : cardList.getCardList()) {
             carNameList.add(card.getCardName());
         }
         return carNameList;
     }
 
     public void getNewCard(Deck deck) {
-        cardList.add(new Card(deck.getNewCard()));
+        Card newCard = new Card(deck.getNewCard());
+        cardList.add(newCard);
     }
 
     public void calculateScore() {
@@ -53,11 +54,7 @@ public class Participant {
         return score.getScore();
     }
 
-    public int getWin() {
-        return win;
-    }
+    public int getWin() { return result.getWin(); }
+    public void setWin() { result.setWin();}
 
-    public void setWin(int win) {
-        this.win = win;
-    }
 }

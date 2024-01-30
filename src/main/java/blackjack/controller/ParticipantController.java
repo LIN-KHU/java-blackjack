@@ -2,11 +2,10 @@ package blackjack.controller;
 
 import blackjack.Deck;
 import blackjack.Participant;
+import blackjack.PlayerList;
+import blackjack.PlayerNameList;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParticipantController {
     private final InputView input;
@@ -17,21 +16,21 @@ public class ParticipantController {
         this.output = output;
     }
 
-    public List<Participant> setPlayer() {
+    public PlayerList setPlayer() {
         output.printInputPlayerNameMessage();
-        List<String> playerNameList = input.readPlayerName();
-        List<Participant> playerList = new ArrayList<Participant>();
-        for (String name : playerNameList) {
+        PlayerNameList playerNameList = input.readPlayerName();
+        PlayerList playerList = new PlayerList();
+        for (String name : playerNameList.getPlayerNameList()) {
             playerList.add(new Participant(name));
         }
         return playerList;
     }
 
-    public void printCardList(List<Participant> playerList, Participant dealer) {
+    public void printCardList(PlayerList playerList, Participant dealer) {
         output.printCardSharedMessage(playerList);
         output.printDealerInitialCardList(dealer);
         output.printNewLine();
-        for (Participant player : playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             output.printPlayerCardList(player);
             output.printNewLine();
         }

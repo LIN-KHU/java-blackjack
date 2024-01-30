@@ -1,5 +1,7 @@
 package blackjack.view;
 
+import blackjack.PlayerNameList;
+
 import java.util.*;
 
 public class InputView {
@@ -8,21 +10,8 @@ public class InputView {
     public InputView() {
         this.scanner = new Scanner(System.in);
     }
-    public List<String> readPlayerName() {
-        String str = scanner.nextLine();
-        checkPlayerName(str);
-        return Arrays.asList(str.split(","));
-    }
-
-    private void checkPlayerName(String str) {
-        try {
-            if (str.isBlank()) {
-                throw new IllegalArgumentException();
-            }
-        }
-        catch (IllegalArgumentException ex) {
-            System.exit(1);
-        }
+    public PlayerNameList readPlayerName() {
+        return new PlayerNameList(scanner.nextLine());
     }
 
     public char readCommand() {
@@ -41,5 +30,4 @@ public class InputView {
             System.exit(1);
         }
     }
-
 }

@@ -1,11 +1,10 @@
 package blackjack.view;
 
 import blackjack.Participant;
-import blackjack.Card;
+import blackjack.PlayerList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
 public class OutputView {
 
@@ -13,9 +12,9 @@ public class OutputView {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
     }
 
-    public void printCardSharedMessage(List<Participant> playerList) {
+    public void printCardSharedMessage(PlayerList playerList) {
         List<String> playerNameList = new ArrayList<>();
-        for (Participant player : playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             playerNameList.add(player.getName());
         }
         System.out.println("\n딜러와 " + String.join(", ", playerNameList) + "에게 2장을 나누었습니다.");

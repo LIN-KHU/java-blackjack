@@ -17,21 +17,22 @@ public class Score {
         this.score = number;
     }
 
-    public void calculate(List<Card> cardList) {
-        for (Card card : cardList) {
+    public void calculate(CardList cardList) {
+        this.score = 0;
+        for (Card card : cardList.getCardList()) {
             this.score += checkCardScore(card);
         }
     }
 
     public int checkCardScore(Card card) {
-        if (card.checkIfNumeric()) {
+        if (card.checkScoreIfNumeric()) {
             return card.getCardScore() - '0';
         }
         return getIfNotNumeric(card);
     }
 
     public int getIfNotNumeric(Card card) {
-        if (card.checkIfAce()) {
+        if (card.checkScoreIfAce()) {
             return 11;
         }
         return 10;

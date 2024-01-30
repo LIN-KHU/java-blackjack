@@ -2,9 +2,10 @@ package blackjack.controller;
 
 import blackjack.Deck;
 import blackjack.Participant;
+import blackjack.PlayerList;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
-import java.util.List;
+
 public class GameController {
 
     private final InputView input;
@@ -31,19 +32,19 @@ public class GameController {
         output.printPlayerCardList(player);
         output.printNewLine();
     }
-    public void printScore(Participant dealer, List<Participant> playerList) {
+    public void printScore(Participant dealer, PlayerList playerList) {
         output.printDealerResultCardList(dealer);
         output.printScore(dealer.getScore());
-        for (Participant player : playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             output.printPlayerCardList(player);
             output.printScore(player.getScore());
         }
     }
 
-    public void printResult(Participant dealer, List<Participant> playerList) {
+    public void printResult(Participant dealer, PlayerList playerList) {
         output.printNewLine();
         output.printDealerResult(dealer, playerList.size() - dealer.getWin());
-        for (Participant player : playerList) {
+        for (Participant player : playerList.getPlayerList()) {
             checkIfPlayerWin(player);
             checkIfPlayerLose(player);
         }
