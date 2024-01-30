@@ -15,6 +15,12 @@ public class CardPool {
 		}
 	}
 
+	public static Card draw(CardShuffler shuffler) {
+		Card card = shuffler.draw();
+		cardPool.remove(card);
+		return card;
+	}
+
 	private List<Card> createCardPool() {
 		List<Card> cardPool = new ArrayList<>();
 		for (CardSuit suit : CardSuit.values()) {
