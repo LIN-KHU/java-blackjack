@@ -5,15 +5,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BlackJackGame {
-    private Dealer dealer = new Dealer();
+    private Dealer dealer;
     private List<Player> players;
-    private CardDeck cardDeck = new CardDeck();
-    private List<Player> winners = new ArrayList<>();
-    
+    private CardDeck cardDeck;
+    private List<Player> winners;
+
     public BlackJackGame(List<String> splitPlayerNames) {
         players = splitPlayerNames.stream()
                 .map(playerNames -> new Player(playerNames))
                 .collect(Collectors.toList());
+        dealer = new Dealer();
+        cardDeck = new CardDeck();
+        winners = new ArrayList<>();
+        cardDeck.generateCards();
     }
 
     public void startPhase() {
