@@ -6,7 +6,7 @@ import java.util.List;
 public class CardDeck {
 
 	private final List<Card> cards;
-	private static final int MAX_CARD_COUNT = 52;
+	private static final int MAX_CARD_COUNT = 2;
 
 	public CardDeck() {
 		this.cards = new ArrayList<>();
@@ -17,6 +17,12 @@ public class CardDeck {
 			throw new IllegalArgumentException("덱에 추가할 수 있는 카드의 수를 초과하였습니다.");
 		}
 		cards.add(card);
+	}
+
+	public void init(CardShuffler shuffler) {
+		for (int i = 0; i < MAX_CARD_COUNT; i++) {
+			addCard(shuffler.draw());
+		}
 	}
 
 	public Score calculateScore() {
