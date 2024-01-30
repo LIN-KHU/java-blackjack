@@ -1,14 +1,11 @@
 package blackjack;
 
-import java.util.HashMap;
+import blackjack.view.InputView;
+
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.Map;
 import java.util.Collections;
-
-import java.util.Scanner;
 
 public class Application {
 
@@ -27,10 +24,10 @@ public class Application {
 
         for (String participant : participants) {
             for (Map.Entry<String, Participant.ParticipantState> entry : participantStates.entrySet()) {
+                entry.getValue().getName(participant);
                 Between16And21.SumBetween16And21(participant, entry, Cards);
             }
         }
-
 
         for (Map.Entry<String, Participant.ParticipantState> entry : dealerState.entrySet()) {
             Between16And21.DealerBetween16And21(Dealer.get(0), entry, Cards);
@@ -40,17 +37,10 @@ public class Application {
         DecideResult.CompareWithDealer(participants, DealerSum, participantStates);
     }
 
-
-
     private static void ParticipantSize(List<String> participants) {
         if (participants.size() > 25) {
             throw new IllegalArgumentException("가능한 참가 인원을 초과하였습니다.");
         }
     }
-
-
-
-
-
 }
 

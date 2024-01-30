@@ -1,4 +1,4 @@
-package blackjack;
+package blackjack.view;
 
 import java.util.Scanner;
 import java.util.function.Function;
