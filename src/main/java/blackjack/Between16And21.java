@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Between16And21 {
-    public static void SumBetween16And21(String participant, Map.Entry<String, CardGameSimulator.ParticipantState> participantEntry, Map<String, List<Integer>> Cards) {
+    public static void SumBetween16And21(String participant, Map.Entry<String, Participant.ParticipantState> participantEntry, Map<String, List<Integer>> Cards) {
         while(true) {
-            CardGameSimulator.ParticipantState participantState = participantEntry.getValue();
+            Participant.ParticipantState participantState = participantEntry.getValue();
             int sum = participantState.getSum(Cards);
             String name = participantState.getName(participant);
 
@@ -21,7 +21,7 @@ public class Between16And21 {
                 String answer = InputView.getInput("",String::valueOf);
 
                 if("y".equalsIgnoreCase(answer)) {
-                    Map.Entry<String, Integer> extraCard = CardGameSimulator.getRandomCard(Cards);
+                    Map.Entry<String, Integer> extraCard = OperationWithCard.getRandomCard(Cards);
                     int extraCardValue = extraCard.getValue();
                     String extraCardName = extraCard.getKey();
                     participantState.updateSumAndNameList(extraCardValue, extraCardName);
@@ -43,8 +43,8 @@ public class Between16And21 {
         }
     }
 
-    public static void DealerBetween16And21(String Dealer, Map.Entry<String, CardGameSimulator.ParticipantState> DealerEntry, Map<String, List<Integer>> Cards) {
-        CardGameSimulator.ParticipantState DealerState = DealerEntry.getValue();
+    public static void DealerBetween16And21(String Dealer, Map.Entry<String, Participant.ParticipantState> DealerEntry, Map<String, List<Integer>> Cards) {
+        Participant.ParticipantState DealerState = DealerEntry.getValue();
         int sum = DealerState.getSum(Cards);
 
         while(true) {
@@ -53,7 +53,7 @@ public class Between16And21 {
             }
 
             if (sum < 16) {
-                Map.Entry<String, Integer> extraCard = CardGameSimulator.getRandomCard(Cards);
+                Map.Entry<String, Integer> extraCard = OperationWithCard.getRandomCard(Cards);
                 int extraCardValue = extraCard.getValue();
                 String extraCardName = extraCard.getKey();
                 DealerState.updateSumAndNameList(extraCardValue, extraCardName); //DealerEntry<name, Map<String, CardGameSimulator.ParticipantState>

@@ -21,18 +21,18 @@ public class Application {
 
         Collections.shuffle(participants);
 
-        Map<String, CardGameSimulator.ParticipantState> participantStates = CardGameSimulator.simulateCardGame(participants, Cards);
-        Map<String, CardGameSimulator.ParticipantState> dealerState = CardGameSimulator.simulateCardGame(Dealer, Cards);
+        Map<String, Participant.ParticipantState> participantStates = BlackJackGame.simulateCardGame(participants, Cards);
+        Map<String, Participant.ParticipantState> dealerState = BlackJackGame.simulateCardGame(Dealer, Cards);
         int DealerSum = 0;
 
         for (String participant : participants) {
-            for (Map.Entry<String, CardGameSimulator.ParticipantState> entry : participantStates.entrySet()) {
+            for (Map.Entry<String, Participant.ParticipantState> entry : participantStates.entrySet()) {
                 Between16And21.SumBetween16And21(participant, entry, Cards);
             }
         }
 
 
-        for (Map.Entry<String, CardGameSimulator.ParticipantState> entry : dealerState.entrySet()) {
+        for (Map.Entry<String, Participant.ParticipantState> entry : dealerState.entrySet()) {
             Between16And21.DealerBetween16And21(Dealer.get(0), entry, Cards);
             DealerSum = DecideResult.DealerScore(entry);
         }
