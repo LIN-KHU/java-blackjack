@@ -6,10 +6,10 @@ import java.util.List;
 public class CardPool {
 	private static final int MAX_CARD_COUNT = 52;
 
-	private final List<Card> cardPool;
+	private static List<Card> cardPool;
 
 	public CardPool() {
-		this.cardPool = createCardPool();
+		cardPool = createCardPool();
 		if (cardPool.size() > MAX_CARD_COUNT) {
 			throw new IllegalArgumentException("덱에 추가할 수 있는 카드의 수를 초과하였습니다.");
 		}
@@ -25,7 +25,7 @@ public class CardPool {
 		return cardPool;
 	}
 
-	public List<Card> getCardPool() {
+	public static List<Card> getCardPool() {
 		return cardPool;
 	}
 }
