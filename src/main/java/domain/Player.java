@@ -6,12 +6,14 @@ import java.util.List;
 public class Player {
     private final String playerName;
     private final List<Card> playerCardList;
-    private int score = 0;
-    private boolean winOrNot = false;
+    private int score;
+    private boolean winOrNot;
 
     public Player(String playerName){
         this.playerName = playerName;
         this.playerCardList = new ArrayList<>();
+        this.score = 0;
+        this. winOrNot = false;
     }
 
     public void receiveCard(Card receivedCard){
