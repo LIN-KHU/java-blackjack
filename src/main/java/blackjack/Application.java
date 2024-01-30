@@ -25,12 +25,12 @@ public class Application {
         for (String participant : participants) {
             for (Map.Entry<String, Participant.ParticipantState> entry : participantStates.entrySet()) {
                 entry.getValue().getName(participant);
-                Between16And21.SumBetween16And21(participant, entry, Cards);
+                canReceiveCard.ParticipantBetween16And21(participant, entry, Cards);
             }
         }
 
         for (Map.Entry<String, Participant.ParticipantState> entry : dealerState.entrySet()) {
-            Between16And21.DealerBetween16And21(Dealer.get(0), entry, Cards);
+            canReceiveCard.DealerBetween16And21(Dealer.get(0), entry, Cards);
             DealerSum = entry.getValue().printsum();
         }
 

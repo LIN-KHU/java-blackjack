@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class DecideResult {
-
     public static void CompareWithDealer(List<String> participants, int DealerSum, Map<String, Participant.ParticipantState> participantStates) {
 
         int win = 0;
