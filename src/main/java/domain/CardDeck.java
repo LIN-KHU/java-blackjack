@@ -14,7 +14,7 @@ public class CardDeck {
 
 	public void addCard(Card card) {
 		if (cards.size() >= MAX_CARD_COUNT) {
-			throw new IllegalArgumentException("덱에 추가할 수 있는 카드의 수를 초과하였습니다.");
+			throw new IllegalArgumentException("카드 풀에 더 이상 카드를 생성할 수 없습니다.");
 		}
 		cards.add(card);
 	}
