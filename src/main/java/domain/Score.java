@@ -67,7 +67,7 @@ public class Score {
 	}
 
 	public boolean isMoreThanDealer(Participant dealer) {
-		return score > dealer.getCardDeck().calculateScore().score;
+		return score > dealer.getScore();
 	}
 
 	public void addScore(int score) {

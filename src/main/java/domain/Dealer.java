@@ -6,6 +6,6 @@ public class Dealer extends Participant {
 	}
 
 	public boolean checkDrawAgain() {
-		return getCardDeck().calculateScore().getScore() < 17;
+		return getScore() < 17;
 	}
 }

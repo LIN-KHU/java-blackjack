@@ -27,4 +27,8 @@ public class Participant {
 	public CardDeck getCardDeck() {
 		return cardDeck;
 	}
+
+	public int getScore() {
+		return cardDeck.calculateScore().getScore();
+	}
 }
