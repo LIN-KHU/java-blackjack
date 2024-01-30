@@ -23,6 +23,7 @@ public class Application {
 
         Map<String, CardGameSimulator.ParticipantState> participantStates = CardGameSimulator.simulateCardGame(participants, Cards);
         Map<String, CardGameSimulator.ParticipantState> dealerState = CardGameSimulator.simulateCardGame(Dealer, Cards);
+        int DealerSum = 0;
 
         for (String participant : participants) {
             for (Map.Entry<String, CardGameSimulator.ParticipantState> entry : participantStates.entrySet()) {
@@ -33,15 +34,10 @@ public class Application {
 
         for (Map.Entry<String, CardGameSimulator.ParticipantState> entry : dealerState.entrySet()) {
             Between16And21.DealerBetween16And21(Dealer.get(0), entry, Cards);
+            DealerSum = DecideResult.DealerScore(entry);
         }
 
-
-        for (String participant : participants) {
-            for (Map.Entry<String, CardGameSimulator.ParticipantState> entry : participantStates.entrySet()) {
-                DecideResult.CompareWithDealer();
-            }
-
-        }
+        DecideResult.CompareWithDealer(participants, DealerSum, participantStates);
     }
 
     private static <T> T getInput(String prompt, Function<String, T> parser) {
