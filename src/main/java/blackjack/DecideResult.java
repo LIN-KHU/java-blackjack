@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public class DecideResult {
-    public static int DealerScore(Map.Entry<String, Participant.ParticipantState> dealerEntry) {
-        int sum = dealerEntry.getValue().printsum();
-        return sum;
-    }
 
     public static void CompareWithDealer(List<String> participants, int DealerSum, Map<String, Participant.ParticipantState> participantStates) {
 

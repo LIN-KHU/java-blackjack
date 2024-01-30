@@ -31,7 +31,7 @@ public class Application {
 
         for (Map.Entry<String, Participant.ParticipantState> entry : dealerState.entrySet()) {
             Between16And21.DealerBetween16And21(Dealer.get(0), entry, Cards);
-            DealerSum = DecideResult.DealerScore(entry);
+            DealerSum = entry.getValue().printsum();
         }
 
         DecideResult.CompareWithDealer(participants, DealerSum, participantStates);
