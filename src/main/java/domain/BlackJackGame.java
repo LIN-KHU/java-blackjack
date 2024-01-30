@@ -9,6 +9,7 @@ public class BlackJackGame {
     private List<Player> players;
     private CardDeck cardDeck = new CardDeck();
     private List<Player> winners = new ArrayList<>();
+    
     public BlackJackGame(List<String> splitPlayerNames) {
         players = splitPlayerNames.stream()
                 .map(playerNames -> new Player(playerNames))
