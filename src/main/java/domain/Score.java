@@ -24,7 +24,7 @@ public class Score {
 				aceCount++;
 				score += MAX_ACE_SCORE;
 			} else {
-				score += card.getScore();
+				score += card.getSymbolValue();
 			}
 		}
 

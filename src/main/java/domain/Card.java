@@ -13,7 +13,7 @@ public class Card {
 		return symbol == CardSymbol.ACE;
 	}
 
-	public int getScore() {
-		return symbol.getScore();
+	public int getSymbolValue() {
+		return symbol.getValue();
 	}
 }

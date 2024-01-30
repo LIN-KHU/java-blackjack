@@ -16,18 +16,18 @@ public enum CardSymbol {
 	KING("K", 10);
 
 	private String symbol;
-	private int score;
+	private int value;
 
-	CardSymbol(String symbol, int score) {
+	CardSymbol(String symbol, int value) {
 		this.symbol = symbol;
-		this.score = score;
+		this.value = value;
 	}
 
 	public String getSymbol() {
 		return symbol;
 	}
 
-	public int getScore() {
-		return score;
+	public int getValue() {
+		return value;
 	}
 }

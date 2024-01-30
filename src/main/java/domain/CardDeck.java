@@ -28,7 +28,7 @@ public class CardDeck {
 	public Score calculateScore() {
 		Score score = new Score();
 		for (Card card : cards) {
-			score.addScore(card.getScore());
+			score.addScore(card.getSymbolValue());
 		}
 		return score;
 	}
