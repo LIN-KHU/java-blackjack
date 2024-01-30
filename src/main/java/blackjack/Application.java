@@ -16,7 +16,7 @@ public class Application {
         Map<String, List<Integer>> Cards = CardDictionary.createCardDictionary();
 
         List<String> Dealer = Arrays.asList("딜러");
-        List<String> participants = getInput("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)", s -> Arrays.asList(s.split(",")));
+        List<String> participants = InputView.getInput("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)", s -> Arrays.asList(s.split(",")));
         ParticipantSize(participants); //예외 처리
 
         Collections.shuffle(participants);
@@ -40,15 +40,7 @@ public class Application {
         DecideResult.CompareWithDealer(participants, DealerSum, participantStates);
     }
 
-    private static <T> T getInput(String prompt, Function<String, T> parser) {
-        T participants;
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(prompt);
-        String userinput = scanner.nextLine();
-        participants = parser.apply(userinput);
-        return participants;
-    }
 
     private static void ParticipantSize(List<String> participants) {
         if (participants.size() > 25) {

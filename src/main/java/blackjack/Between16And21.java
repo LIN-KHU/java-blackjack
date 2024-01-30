@@ -18,8 +18,7 @@ public class Between16And21 {
 
             if (sum > 16 && sum < 21) {
                 System.out.println(name + "는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)");
-                Scanner scanner = new Scanner(System.in);
-                String answer =  scanner.nextLine();
+                String answer = InputView.getInput("",String::valueOf);
 
                 if("y".equalsIgnoreCase(answer)) {
                     Map.Entry<String, Integer> extraCard = CardGameSimulator.getRandomCard(Cards);
@@ -28,6 +27,12 @@ public class Between16And21 {
                     participantState.updateSumAndNameList(extraCardValue, extraCardName);
 
                     System.out.println(name + "카드: " + participantState.printcardlist());
+
+                    if (participantState.printsum() > 16 && participantState.printsum() <= 21) {
+                        continue;
+                    } else {
+                        break;
+                    }
                     //16과 21인지 판단하고 만약 중간이라면 다시 SumBetween16and21 실행 아니면 continue
                 } else if ("n".equalsIgnoreCase(answer)) {
                     System.out.println(name + "카드: " + participantState.printcardlist());
