@@ -1,6 +1,7 @@
-package blackjack;
+package blackjack.rule;
 
 import blackjack.view.OutView;
+import blackjack.Participant;
 
 import java.util.List;
 import java.util.Map;

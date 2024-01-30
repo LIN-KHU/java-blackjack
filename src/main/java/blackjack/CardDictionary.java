@@ -37,4 +37,3 @@ public class CardDictionary {
         return Cards; //HashMap [[key: 카드 이름, value = 카드 숫자]]
     }
 }
-// Making functional interface!!!!!!!!!

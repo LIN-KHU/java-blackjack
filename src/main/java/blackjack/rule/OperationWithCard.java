@@ -1,9 +1,9 @@
-package blackjack;
+package blackjack.rule;
 
 import java.util.*;
 
 public class OperationWithCard {
-    interface CardOperation {
+    public interface CardOperation {
         void operate(Map.Entry<String, Integer> shuffledCard);
     }
 

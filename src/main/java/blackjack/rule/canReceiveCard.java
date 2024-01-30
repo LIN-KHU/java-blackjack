@@ -1,8 +1,9 @@
-package blackjack;
+package blackjack.rule;
 
 import blackjack.view.InputView;
 import java.util.List;
 import java.util.Map;
+import blackjack.Participant;
 
 public class canReceiveCard {
     public static void ParticipantBetween16And21(String participant, Map.Entry<String, blackjack.Participant.ParticipantState> participantEntry, Map<String, List<Integer>> Cards) {
@@ -39,7 +40,6 @@ public class canReceiveCard {
                     } else {
                         break;
                     }
-                    //16과 21인지 판단하고 만약 중간이라면 다시 SumBetween16and21 실행 아니면 continue
                 } else if ("n".equalsIgnoreCase(answer)) {
                     System.out.println(name + "카드: " + entry.getValue().printcardlist());
                     break;
