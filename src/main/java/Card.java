@@ -15,4 +15,8 @@ public class Card {
     public boolean isAce() {
         return name.contains("A");
     }
+
+    public String getName() {
+        return name;
+    }
 }

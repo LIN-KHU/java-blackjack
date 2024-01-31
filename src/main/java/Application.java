@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Application {
 
@@ -22,47 +23,42 @@ public class Application {
 
         // 카드 생성
         // <--- 2. 랜덤한 카드를 만드는 책임 --->
-        Map<String, Integer> cardAndValue = new HashMap<>();
+        List<Card> cards = new ArrayList<>();
         List<String> cardNumbers = List.of("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
         for (String cardShape : List.of("스페이드", "하트", "클로버", "다이아")) {
             for (int i = 0; i < cardNumbers.size(); i++) {
+                String cardName = cardNumbers.get(i) + cardShape;
                 if (i < 10) {
-                    cardAndValue.put(cardNumbers.get(i) + cardShape, i + 1);
+                    cards.add(new Card(cardName, i + 1));
                     continue;
                 }
-                cardAndValue.put(cardNumbers.get(i) + cardShape, 10);
+                cards.add(new Card(cardName, 10));
             }
         }
 
-        Map<String, Integer> shuffledCards = new LinkedHashMap<>();
-        List<Entry<String, Integer>> entries = new ArrayList<>(cardAndValue.entrySet());
-        Collections.shuffle(entries);
-        for (Entry<String, Integer> entry : entries) {
-            shuffledCards.put(entry.getKey(), entry.getValue());
-        }
+        Collections.shuffle(cards);
 
         // 카드 나눠주기
         // <--- 3. 유저와 딜러에게 카드를 주는 책임 --->
-        List<String> cardNames = new ArrayList<>(shuffledCards.keySet());
-        LinkedHashMap<String, Integer> dealerCard = new LinkedHashMap<>();
-        Map<String, Map<String, Integer>> dealerNameAndCard = new LinkedHashMap<>();
+        List<Card> dealerCard = new ArrayList<>();
+        Map<String, List<Card>> dealerNameAndCard = new LinkedHashMap<>();
 
-        distributeCard(shuffledCards, cardNames, dealerCard);
+        distributeCard(cards, dealerCard);
         dealerNameAndCard.put(dealerName, dealerCard);
 
-        Map<String, Map<String, Integer>> userNameAndCard = new LinkedHashMap<>();
+        Map<String, List<Card>> userNameAndCard = new LinkedHashMap<>();
         for (String user : users) {
-            LinkedHashMap<String, Integer> userCard = new LinkedHashMap<>();
-            distributeCard(shuffledCards, cardNames, userCard);
-            distributeCard(shuffledCards, cardNames, userCard);
+            List<Card> userCard = new ArrayList<>();
+            distributeCard(cards, userCard);
+            distributeCard(cards, userCard);
             userNameAndCard.put(user, userCard);
         }
 
         System.out.println(String.format("%s와 %s에게 2장을 나누었습니다", dealerName, String.join(", ", users)));
-        System.out.println(String.format("%s: %s", dealerName, String.join(",", dealerCard.keySet())));
+        printCard(dealerName, dealerCard);
 
         for (String user : users) {
-            System.out.println(String.format("%s: %s", user, String.join(",", userNameAndCard.get(user).keySet())));
+            printCard(user, userNameAndCard.get(user));
         }
 
         // 유저 추가 카드 받기
@@ -75,11 +71,12 @@ public class Application {
             if (!"n".equals(newCardRequired) && !"y".equals(newCardRequired)) {
                 throw new IllegalArgumentException("카드를 추가로 받기 위해서는 y or n 을 입력해야함");
             }
-            Map<String, Integer> userCards = userNameAndCard.get(user);
+            List<Card> userCards = userNameAndCard.get(user);
             while ("y".equals(newCardRequired)) {
-                distributeCard(shuffledCards, cardNames, userCards);
-                Integer userCardValue = calculateScore(userCards);
-                System.out.println(String.format("%s: %s", user, String.join(",", userNameAndCard.get(user).keySet())));
+                distributeCard(cards, userCards);
+                Hands userHands = new Hands(userCards);
+                Integer userCardValue = userHands.calculateValue();
+                printCard(user, userCards);
                 if (userCardValue > 21) {
                     break;
                 }
@@ -90,36 +87,35 @@ public class Application {
 
         // 딜러 카드 추가로 받기
         // <--- 5. 딜러에게 알맞는 카드를 주는 행위 --->
-        int dealerScore = calculateWithBonus(dealerCard);
+        Hands dealerHand = new Hands(dealerCard);
+        int dealerScore = dealerHand.calculateWithBonusValue();
         while (dealerScore <= 16) {
             System.out.println();
             System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
-            distributeCard(shuffledCards, cardNames, dealerCard);
-            dealerScore = calculateScore(dealerCard);
-
-            Integer dealerScoreWithBonus = calculateWithBonus(dealerCard);
+            distributeCard(cards, dealerCard);
+            Hands cardAddedDealerHand = new Hands(dealerCard);
+            dealerScore = cardAddedDealerHand.calculateValue();
+            Integer dealerScoreWithBonus = cardAddedDealerHand.calculateWithBonusValue();
             if (dealerScoreWithBonus <= 21 && dealerScoreWithBonus >= 16) {
                 dealerScore = dealerScoreWithBonus;
             }
-            System.out.println(String.format("%s: %s", dealerName, String.join(",", dealerCard.keySet())));
+            printCard(dealerName, dealerCard);
         }
 
         // 최중 카드 출력
         // <--- 6. 유저에게 화면을 출력하는 책임 --->
-        System.out.println(
-            String.format("%s 카드: %s = 결과: %d", dealerName, String.join(", ", dealerCard.keySet()),
-                calculateWithBonus(dealerCard)));
+        Hands endDealerHands = new Hands(dealerCard);
+        printFinalCard(dealerName, endDealerHands);
 
         for (String user : users) {
-            Map<String, Integer> userCards = userNameAndCard.get(user);
-            System.out.println(
-                String.format("%s 카드: %s = 결과: %d", user, String.join(", ", userCards.keySet()),
-                    calculateWithBonus(userCards)));
+            List<Card> userCard = userNameAndCard.get(user);
+            printFinalCard(user, new Hands(userCard));
         }
 
         // 최종 승패 출력
         // <--- 7. 승, 패를 판단하는 책임 --->
-        int finalDealerCardSum = calculateWithBonus(dealerNameAndCard.get(dealerName));
+        Hands hands = new Hands(dealerNameAndCard.get(dealerName));
+        int finalDealerCardSum = hands.calculateWithBonusValue();
         if (finalDealerCardSum > 21) {
             finalDealerCardSum = 0;
         }
@@ -127,8 +123,8 @@ public class Application {
         Map<String, Integer> dealerResult = new HashMap<>();
         Map<String, String> userResult = new HashMap<>();
         for (String user : users) {
-            Map<String, Integer> finalUserCard = userNameAndCard.get(user);
-            int finalUserCardSum = calculateWithBonus(finalUserCard);
+            Hands userHands = new Hands(userNameAndCard.get(user));
+            int finalUserCardSum = userHands.calculateWithBonusValue();
             if (finalUserCardSum > 21) {
                 finalUserCardSum = 0;
             }
@@ -159,34 +155,25 @@ public class Application {
         }
     }
 
-    // <--- 8. 보너스 점수를 고려하여 카드들의 합을 계산하는 로직 --->
-    private static int calculateWithBonus(Map<String, Integer> cards) {
-        Integer originScore = calculateScore(cards);
-        boolean hasAce = cards.keySet().stream()
-            .anyMatch(cardName -> cardName.contains("A"));
-        int aceBonusScore = 10;
-        int scoreWithBonus = originScore + aceBonusScore;
-        if (hasAce && scoreWithBonus <= 21) {
-            return scoreWithBonus;
-        }
-        return originScore;
+    private static void printFinalCard(String name, Hands hands) {
+        List<String> cardNames = hands.getCards().stream()
+            .map(Card::getName)
+            .collect(Collectors.toList());
+
+        System.out.println(
+            String.format("%s 카드: %s = 결과: %d", name, String.join(", ", cardNames), hands.calculateWithBonusValue()));
     }
 
-    // <--- 9. 보너스 점수 없이 카드 그대로의 합을 계산하는 로직 --->
-    private static Integer calculateScore(Map<String, Integer> userCards) {
-        return userCards.values().stream()
-            .reduce(Integer::sum)
-            .orElseThrow(() -> new IllegalArgumentException("빈 카드는 계산할 수 없습니다."));
+    private static void printCard(String name, List<Card> cards) {
+        List<String> cardNames = cards.stream()
+            .map(card -> card.getName())
+            .collect(Collectors.toList());
+        System.out.println(String.format("%s: %s", name, String.join(",", cardNames)));
     }
 
     // <--- 3.1 대상에게 실질적으로 카드를 주는 로직 --->
-    private static Map<String, Integer> distributeCard(Map<String, Integer> shuffledCards,
-                                                       List<String> cardNames,
-                                                       Map<String, Integer> cards) {
-        String cardName = cardNames.remove(0);
-        Integer cardValue = shuffledCards.remove(cardName);
-        cards.put(cardName, cardValue);
-        return cards;
+    private static void distributeCard(List<Card> deck, List<Card> userCards) {
+        userCards.add(deck.remove(0));
     }
 
     /*

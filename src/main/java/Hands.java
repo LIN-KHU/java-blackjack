@@ -25,4 +25,8 @@ public class Hands {
         }
         return value;
     }
+
+    public List<Card> getCards() {
+        return cards;
+    }
 }
