@@ -6,7 +6,7 @@ import blackjack.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-import static blackjack.message.MessageConst.*;
+import static blackjack.view.message.MessageConst.*;
 
 public class OutputView {
 
