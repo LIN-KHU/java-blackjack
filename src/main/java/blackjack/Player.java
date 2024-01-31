@@ -30,16 +30,6 @@ public class Player {
         return this.name;
     }
 
-    public String chooseStayOrHit(String state) {
-
-        if (state.equals("y")) {
-            return "y";
-        } else if (state.equals("n")) {
-            return "n";
-        }
-        return null;
-    }
-
     public void getCard(HashMap<String, Integer> card) {
         cards.getCards(card);
     }

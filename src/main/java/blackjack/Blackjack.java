@@ -57,10 +57,10 @@ public class Blackjack {
             Player player = playerList.get(i);
             while (true) {
                 outputView.stayOrHitMsg(player);
-                String playerStayOrHitState = player.chooseStayOrHit(inputView.readPlayerStayOrHitState());
+                String playerStayOrHitState = inputView.readPlayerStayOrHitState();
 
-                if (playerStayOrHitState == "y") {
-                    player.getCard(card.getCard());
+                if (playerStayOrHitState.equals("y")) {
+                    player.getCard(cardGenerator.getCard());
                     outputView.printPlayerCard(player);
                     if(player.getSumCardNumber() < 22){
                         i--;
@@ -68,7 +68,7 @@ public class Blackjack {
                         outputView.printSumCardNumberOver();
                     }
                     break;
-                } else if (playerStayOrHitState == "n") {
+                } else if (playerStayOrHitState.equals("n")) {
                     outputView.printPlayerCard(player);
                     break;
                 } else {
