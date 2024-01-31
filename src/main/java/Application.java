@@ -74,7 +74,6 @@ public class Application {
             Map<String, Integer> userCards = userNameAndCard.get(user);
             while ("y".equals(newCardRequired)) {
                 distributeCard(shuffledCards, cardNames, userCards);
-                // <--- 점수 계산 로직 --->
                 Integer userCardValue = calculateScore(userCards);
                 System.out.println(String.format("%s: %s", user, String.join(",", userNameAndCard.get(user).keySet())));
                 if (userCardValue > 21) {
@@ -87,6 +86,8 @@ public class Application {
 
         // 딜러 카드 추가로 받기
         Integer dealerCardSum = calculateScore(dealerCard);
+
+        // <--- Ace를 보너스 점수로 바라봤을 때 계산 로직 --->
         boolean dealerHaveAce = dealerCard.keySet().stream()
             .anyMatch(s -> s.contains("A"));
         int bonusCardSumConsidered = dealerCardSum;
@@ -98,11 +99,11 @@ public class Application {
             System.out.println();
             System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
             distributeCard(shuffledCards, cardNames, dealerCard);
+
+            // <--- Ace를 보너스 점수로 바라봤을 때 계산 로직 --->
             boolean dealerHaveAce2 = dealerCard.keySet().stream()
                 .anyMatch(s -> s.contains("A"));
-            Integer dealerCardSum2 = dealerCard.values().stream()
-                .reduce(Integer::sum)
-                .orElseThrow(() -> new IllegalArgumentException("딜러 카드가 없습니다"));
+            Integer dealerCardSum2 = calculateScore(dealerCard);
 
             if (dealerHaveAce2 && dealerCardSum2 + 10 <= 21 && dealerCardSum > 16) {
                 bonusCardSumConsidered = dealerCardSum2 + 10;
@@ -113,8 +114,9 @@ public class Application {
         }
 
         // 최중 카드 출력
-        // <--- 점수 계산 로직 --->
         Integer originDealerCardSum = calculateScore(dealerCard);
+
+        // <--- Ace를 보너스 점수로 바라봤을 때 계산 로직 --->
         boolean haveAce = dealerCard.keySet().stream()
             .anyMatch(s -> s.contains("A"));
         if (haveAce && originDealerCardSum + 10 <= 21) {
@@ -125,8 +127,8 @@ public class Application {
                 originDealerCardSum));
 
         for (String user : users) {
-            // <--- 점수 계산 로직 --->
             Integer originUserCardSum = calculateScore(userNameAndCard.get(user));
+            // <--- Ace를 보너스 점수로 바라봤을 때 계산 로직 --->
             boolean userHaveAce = dealerCard.keySet().stream()
                 .anyMatch(s -> s.contains("A"));
             if (userHaveAce && originUserCardSum + 10 <= 21) {
@@ -139,8 +141,8 @@ public class Application {
 
         // 최종 승패 출력
         Map<String, Integer> finalDealerCard = dealerNameAndCard.get(dealerName);
-        // <--- 점수 계산 로직 --->
         int finalDealerCardSum = calculateScore(dealerCard);
+        // <--- Ace를 보너스 점수로 바라봤을 때 계산 로직 --->
         boolean existDealerAce = finalDealerCard.keySet().stream()
             .anyMatch(s -> s.contains("A"));
         if (existDealerAce && finalDealerCardSum + 10 <= 21) {
@@ -154,8 +156,8 @@ public class Application {
 
         for (String user : users) {
             Map<String, Integer> finalUserCard = userNameAndCard.get(user);
-            // <--- 점수 계산 로직 --->
             Integer finalUserCardSum = calculateScore(finalUserCard);
+            // <--- Ace를 보너스 점수로 바라봤을 때 계산 로직 --->
             boolean existUserAce = finalUserCard.keySet().stream()
                 .anyMatch(s -> s.contains("A"));
             if (existUserAce && finalUserCardSum + 10 <= 21) {
