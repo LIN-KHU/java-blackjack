@@ -1,4 +1,4 @@
-package blackjack.message;
+package blackjack.view.message;
 
 public class MessageConst {
 
