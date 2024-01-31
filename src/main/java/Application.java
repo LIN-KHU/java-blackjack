@@ -41,25 +41,19 @@ public class Application {
 
         // 카드 나눠주기
         List<String> cardNames = new ArrayList<>(shuffledCards.keySet());
+        LinkedHashMap<String, Integer> dealerCard = new LinkedHashMap<>();
         Map<String, Map<String, Integer>> dealerNameAndCard = new LinkedHashMap<>();
 
         // <--- 카드 분배 로직 --->
-        String dealerCardName = cardNames.remove(0);
-        Integer dealerCardValue = shuffledCards.remove(dealerCardName);
-        LinkedHashMap<String, Integer> dealerCard = new LinkedHashMap<>();
-        dealerCard.put(dealerCardName, dealerCardValue);
+        distributeCard(shuffledCards, cardNames, dealerCard);
         dealerNameAndCard.put(dealerName, dealerCard);
 
         Map<String, Map<String, Integer>> userNameAndCard = new LinkedHashMap<>();
         for (String user : users) {
             // <--- 카드 분배 로직 --->
-            String firstUserCardName = cardNames.remove(0);
-            Integer firstUserCardValue = shuffledCards.remove(firstUserCardName);
-            String secondUserCardName = cardNames.remove(0);
-            Integer secondUserCardValue = shuffledCards.remove(secondUserCardName);
             LinkedHashMap<String, Integer> userCard = new LinkedHashMap<>();
-            userCard.put(firstUserCardName, firstUserCardValue);
-            userCard.put(secondUserCardName, secondUserCardValue);
+            distributeCard(shuffledCards, cardNames, userCard);
+            distributeCard(shuffledCards, cardNames, userCard);
             userNameAndCard.put(user, userCard);
         }
 
@@ -80,15 +74,12 @@ public class Application {
                 throw new IllegalArgumentException("카드를 추가로 받기 위해서는 y or n 을 입력해야함");
             }
             Map<String, Integer> userCards = userNameAndCard.get(user);
-            Integer userCardValue = userCards.values().stream()
-                .reduce(Integer::sum)
-                .orElseThrow(() -> new IllegalArgumentException("유저가 카드를 가지고 있지 않습니다."));
             while ("y".equals(newCardRequired)) {
                 // <--- 카드 분배 로직 --->
-                String additionalUserCardName = cardNames.remove(0);
-                Integer additionalUserCardValue = shuffledCards.remove(additionalUserCardName);
-                userCards.put(additionalUserCardName, additionalUserCardValue);
-                userCardValue += additionalUserCardValue;
+                distributeCard(shuffledCards, cardNames, userCards);
+                Integer userCardValue = userCards.values().stream()
+                    .reduce(Integer::sum)
+                    .orElseThrow(() -> new IllegalArgumentException("유저 카드가 없다"));
                 System.out.println(String.format("%s: %s", user, String.join(",", userNameAndCard.get(user).keySet())));
                 if (userCardValue > 21) {
                     break;
@@ -97,7 +88,6 @@ public class Application {
                 newCardRequired = scanner.nextLine();
             }
         }
-
 
         // 딜러 카드 추가로 받기
         Integer dealerCardSum = dealerCard.values().stream()
@@ -114,14 +104,17 @@ public class Application {
             System.out.println();
             System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
             // <--- 카드 분배 로직 --->
-            String additionalDealerCardName = cardNames.remove(0);
-            Integer additionalDealerCardValue = shuffledCards.remove(additionalDealerCardName);
-            dealerCard.put(additionalDealerCardName, additionalDealerCardValue);
-            dealerCardSum += additionalDealerCardValue;
-            if (dealerHaveAce && dealerCardSum + 10 <= 21 && dealerCardSum > 16) {
-                bonusCardSumConsidered += dealerCardSum + 10;
+            distributeCard(shuffledCards, cardNames, dealerCard);
+            boolean dealerHaveAce2 = dealerCard.keySet().stream()
+                .anyMatch(s -> s.contains("A"));
+            Integer dealerCardSum2 = dealerCard.values().stream()
+                .reduce(Integer::sum)
+                .orElseThrow(() -> new IllegalArgumentException("딜러 카드가 없습니다"));
+
+            if (dealerHaveAce2 && dealerCardSum2 + 10 <= 21 && dealerCardSum > 16) {
+                bonusCardSumConsidered = dealerCardSum2 + 10;
             } else {
-                bonusCardSumConsidered = dealerCardSum;
+                bonusCardSumConsidered = dealerCardSum2;
             }
             System.out.println(String.format("%s: %s", dealerName, String.join(",", dealerCard.keySet())));
         }
@@ -207,5 +200,14 @@ public class Application {
         for (Entry<String, String> entry : userResult.entrySet()) {
             System.out.println(String.format("%s: %s", entry.getKey(), entry.getValue()));
         }
+    }
+
+    private static Map<String, Integer> distributeCard(Map<String, Integer> shuffledCards,
+                                                       List<String> cardNames,
+                                                       Map<String, Integer> cards) {
+        String cardName = cardNames.remove(0);
+        Integer cardValue = shuffledCards.remove(cardName);
+        cards.put(cardName, cardValue);
+        return cards;
     }
 }
