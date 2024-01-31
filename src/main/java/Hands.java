@@ -29,4 +29,8 @@ public class Hands {
     public List<Card> getCards() {
         return cards;
     }
+
+    public void add(Card card) {
+        cards.add(card);
+    }
 }
