@@ -44,13 +44,11 @@ public class Application {
         LinkedHashMap<String, Integer> dealerCard = new LinkedHashMap<>();
         Map<String, Map<String, Integer>> dealerNameAndCard = new LinkedHashMap<>();
 
-        // <--- 카드 분배 로직 --->
         distributeCard(shuffledCards, cardNames, dealerCard);
         dealerNameAndCard.put(dealerName, dealerCard);
 
         Map<String, Map<String, Integer>> userNameAndCard = new LinkedHashMap<>();
         for (String user : users) {
-            // <--- 카드 분배 로직 --->
             LinkedHashMap<String, Integer> userCard = new LinkedHashMap<>();
             distributeCard(shuffledCards, cardNames, userCard);
             distributeCard(shuffledCards, cardNames, userCard);
@@ -75,8 +73,8 @@ public class Application {
             }
             Map<String, Integer> userCards = userNameAndCard.get(user);
             while ("y".equals(newCardRequired)) {
-                // <--- 카드 분배 로직 --->
                 distributeCard(shuffledCards, cardNames, userCards);
+                // <--- 점수 계산 로직 --->
                 Integer userCardValue = userCards.values().stream()
                     .reduce(Integer::sum)
                     .orElseThrow(() -> new IllegalArgumentException("유저 카드가 없다"));
@@ -90,6 +88,7 @@ public class Application {
         }
 
         // 딜러 카드 추가로 받기
+        // <--- 점수 계산 로직 --->
         Integer dealerCardSum = dealerCard.values().stream()
             .reduce(Integer::sum)
             .orElseThrow(() -> new IllegalArgumentException("딜러 카드가 없습니다"));
@@ -103,7 +102,6 @@ public class Application {
         while (bonusCardSumConsidered <= 16) {
             System.out.println();
             System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
-            // <--- 카드 분배 로직 --->
             distributeCard(shuffledCards, cardNames, dealerCard);
             boolean dealerHaveAce2 = dealerCard.keySet().stream()
                 .anyMatch(s -> s.contains("A"));
@@ -120,6 +118,7 @@ public class Application {
         }
 
         // 최중 카드 출력
+        // <--- 점수 계산 로직 --->
         Integer originDealerCardSum = dealerCard.values().stream()
             .reduce(Integer::sum)
             .orElseThrow(() -> new IllegalArgumentException("딜러 카드가 없습니다"));
@@ -133,6 +132,7 @@ public class Application {
                 originDealerCardSum));
 
         for (String user : users) {
+            // <--- 점수 계산 로직 --->
             Integer originUserCardSum = userNameAndCard.get(user).values().stream()
                 .reduce(Integer::sum)
                 .orElseThrow(() -> new IllegalArgumentException("유저 카드가 없습니다"));
@@ -148,6 +148,7 @@ public class Application {
 
         // 최종 승패 출력
         Map<String, Integer> finalDealerCard = dealerNameAndCard.get(dealerName);
+        // <--- 점수 계산 로직 --->
         int finalDealerCardSum = finalDealerCard.values().stream()
             .reduce(Integer::sum)
             .orElseThrow(() -> new IllegalArgumentException("딜러 카드가 없다"));
@@ -164,6 +165,7 @@ public class Application {
 
         for (String user : users) {
             Map<String, Integer> finalUserCard = userNameAndCard.get(user);
+            // <--- 점수 계산 로직 --->
             Integer finalUserCardSum = finalUserCard.values().stream()
                 .reduce(Integer::sum)
                 .orElseThrow(() -> new IllegalArgumentException("유저 카드가 없다"));
