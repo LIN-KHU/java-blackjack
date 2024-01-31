@@ -1,4 +1,5 @@
 public class Card {
+
     private final String name;
     private final int value;
 
@@ -7,7 +8,11 @@ public class Card {
         this.value = value;
     }
 
-    public int calculateValue(){
+    public int calculateValue() {
         return value;
+    }
+
+    public boolean isAce() {
+        return name.contains("A");
     }
 }
