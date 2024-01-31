@@ -31,11 +31,9 @@ public class Blackjack {
 
     private void getPlayerName() {
         outputView.startGameMsg();
-        String player = inputView.readPlayerName();
-        String[] playerArray = player.split(",");
-
-        for (String playerName : playerArray) {
-            playerList.add(new Player(playerName));
+        List<String> playerList = inputView.readPlayerName();
+        for (String playerName : playerList) {
+            this.playerList.add(new Player(playerName));
         }
     }
 
