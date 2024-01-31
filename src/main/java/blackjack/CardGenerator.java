@@ -5,11 +5,11 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class Card {
+public class CardGenerator {
 
     private String[][] cardArray = new String[4][12];
 
-    public Card() {
+    public CardGenerator() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 12; j++) {
                 String[] cardShapeArray = {"하트", "클로버", "다이아", "스페이드"};
