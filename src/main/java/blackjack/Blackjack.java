@@ -1,11 +1,9 @@
 package blackjack;
 
-import blackjack.message.MessageConst;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static blackjack.message.MessageConst.*;
@@ -24,7 +22,7 @@ public class Blackjack {
         getPlayerName();
         initializeCard();
         printPlayerCard();
-        stayOrHit();
+        playerChooseStayOrHit();
         dealerGetCard();
         gameOver();
     }
@@ -53,7 +51,7 @@ public class Blackjack {
         }
     }
 
-    private void stayOrHit() {
+    private void playerChooseStayOrHit() {
 
         for (int i = 0; i < playerList.size(); i++) {
             Player player = playerList.get(i);
