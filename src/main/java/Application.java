@@ -43,6 +43,7 @@ public class Application {
         List<String> cardNames = new ArrayList<>(shuffledCards.keySet());
         Map<String, Map<String, Integer>> dealerNameAndCard = new LinkedHashMap<>();
 
+        // <--- 카드 분배 로직 --->
         String dealerCardName = cardNames.remove(0);
         Integer dealerCardValue = shuffledCards.remove(dealerCardName);
         LinkedHashMap<String, Integer> dealerCard = new LinkedHashMap<>();
@@ -51,6 +52,7 @@ public class Application {
 
         Map<String, Map<String, Integer>> userNameAndCard = new LinkedHashMap<>();
         for (String user : users) {
+            // <--- 카드 분배 로직 --->
             String firstUserCardName = cardNames.remove(0);
             Integer firstUserCardValue = shuffledCards.remove(firstUserCardName);
             String secondUserCardName = cardNames.remove(0);
@@ -82,6 +84,7 @@ public class Application {
                 .reduce(Integer::sum)
                 .orElseThrow(() -> new IllegalArgumentException("유저가 카드를 가지고 있지 않습니다."));
             while ("y".equals(newCardRequired)) {
+                // <--- 카드 분배 로직 --->
                 String additionalUserCardName = cardNames.remove(0);
                 Integer additionalUserCardValue = shuffledCards.remove(additionalUserCardName);
                 userCards.put(additionalUserCardName, additionalUserCardValue);
@@ -110,6 +113,7 @@ public class Application {
         while (bonusCardSumConsidered <= 16) {
             System.out.println();
             System.out.println("딜러는 16이하라 한장의 카드를 더 받았습니다.");
+            // <--- 카드 분배 로직 --->
             String additionalDealerCardName = cardNames.remove(0);
             Integer additionalDealerCardValue = shuffledCards.remove(additionalDealerCardName);
             dealerCard.put(additionalDealerCardName, additionalDealerCardValue);
