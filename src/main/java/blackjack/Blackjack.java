@@ -47,9 +47,9 @@ public class Blackjack {
     }
 
     private void printPlayerCard() {
-        dealer.printCard();
+        outputView.printDealerCard(dealer);
         for (Player player : playerList) {
-            player.printCard();
+            outputView.printPlayerCard(player);
         }
     }
 
@@ -63,7 +63,7 @@ public class Blackjack {
 
                 if (playerStayOrHitState == "y") {
                     player.getCard(card.getCard());
-                    player.printCard();
+                    outputView.printPlayerCard(player);
                     if(player.getSumCardNumber() < 22){
                         i--;
                     } else {
@@ -71,7 +71,7 @@ public class Blackjack {
                     }
                     break;
                 } else if (playerStayOrHitState == "n") {
-                    player.printCard();
+                    outputView.printPlayerCard(player);
                     break;
                 } else {
                     outputView.printStateInputErrorMsg();

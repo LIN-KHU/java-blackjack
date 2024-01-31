@@ -36,9 +36,9 @@ public class OutputView {
     }
 
     public void printGameResult(Dealer dealer, List<Player> playerList) {
-        dealer.printDealerResult();
+        printDealerResult(dealer);
         for (Player player : playerList) {
-            player.printPlayerResult();
+            printPlayerResult(player);
         }
         System.out.println("\n" + FINAL_WINNER + "\n");
         ;
@@ -52,5 +52,21 @@ public class OutputView {
     }
     public void printSumCardNumberOver() {
         System.out.println(SUM_CARD_NUMBER_OVER);
+    }
+
+    public void printDealerCard(Dealer dealer){
+        System.out.println("딜러: " + dealer.getCardListToString());
+    }
+
+    public void printPlayerCard(Player player) {
+        System.out.println(player.getName() + "카드: " + player.getCardNameListToString());
+    }
+
+    public void printDealerResult(Dealer dealer){
+        System.out.println("딜러 카드: " + dealer.getCardListToString() + " - 결과: "+dealer.getSumCardNumber());
+    }
+
+    public void printPlayerResult(Player player) {
+        System.out.println(player.getName() + "카드: " + player.getCardNameListToString() + " - 결과: " + player.getSumCardNumber());
     }
 }

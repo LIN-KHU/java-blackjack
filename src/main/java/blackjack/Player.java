@@ -7,19 +7,16 @@ import java.util.List;
 public class Player {
 
     private String name;
-    private HashMap<String, Integer> cardList = new HashMap<>();
+    //private HashMap<String, Integer> cardList = new HashMap<>();
+    private Cards cards = new Cards(new HashMap<>());
     private String gameResult;
 
     public Player(String name) {
         this.name = name;
     }
 
-    public void printCard() {
-        List<String> cardNameList = new ArrayList<>();
-        cardNameList.addAll(cardList.keySet());
-
-        String s = String.join(",", cardNameList);
-        System.out.println(name + "카드: " + s);
+    public String getCardNameListToString(){
+        return cards.getCardNameListToString();
     }
 
     public void setGameResult(String state){
@@ -44,34 +41,10 @@ public class Player {
     }
 
     public void getCard(HashMap<String, Integer> card) {
-        cardList.putAll(card);
-    }
-
-    public void printPlayerResult() {
-        List<String> cardNameList = new ArrayList<>();
-        cardNameList.addAll(cardList.keySet());
-        String s = String.join(",", cardNameList);
-
-        for(String cardName: cardNameList){
-            if(cardName.contains("A")){
-                if(Math.abs(21 - getSumCardNumber()) > Math.abs(21 - getSumCardNumber() +10)){
-                    cardList.replace(cardName, 11);
-                }
-            }
-        }
-
-        int sumCardNumber = getSumCardNumber();
-        System.out.println(name + "카드: " + s + " - 결과: " + sumCardNumber);
+        cards.getCards(card);
     }
 
     public int getSumCardNumber() {
-        int sum = 0;
-        List<Integer> cardNumberList = new ArrayList<>();
-        cardNumberList.addAll(cardList.values());
-
-        for (int number : cardNumberList) {
-            sum += number;
-        }
-        return sum;
+        return cards.getSumCardNumber();
     }
 }
