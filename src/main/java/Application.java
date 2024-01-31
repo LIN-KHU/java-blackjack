@@ -11,6 +11,7 @@ public class Application {
 
     public static void main(String[] args) {
         // 유저 입력 받기
+        // <--- 1. 유저의 이름을 입력 받는 책임 --->
         System.out.println("게임에 참여할 사람의 이름을 입력하세요. (쉼표 기준으로 분리)");
         Scanner scanner = new Scanner(System.in);
         String userNames = scanner.nextLine();
@@ -20,6 +21,7 @@ public class Application {
         String dealerName = "딜러";
 
         // 카드 생성
+        // <--- 2. 랜덤한 카드를 만드는 책임 --->
         Map<String, Integer> cardAndValue = new HashMap<>();
         List<String> cardNumbers = List.of("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
         for (String cardShape : List.of("스페이드", "하트", "클로버", "다이아")) {
@@ -40,6 +42,7 @@ public class Application {
         }
 
         // 카드 나눠주기
+        // <--- 3. 유저와 딜러에게 카드를 주는 책임 --->
         List<String> cardNames = new ArrayList<>(shuffledCards.keySet());
         LinkedHashMap<String, Integer> dealerCard = new LinkedHashMap<>();
         Map<String, Map<String, Integer>> dealerNameAndCard = new LinkedHashMap<>();
@@ -63,6 +66,7 @@ public class Application {
         }
 
         // 유저 추가 카드 받기
+        // <--- 4. 유저의 의사에 따라 유저에게 카드를 주는 책임 --->
         System.out.println();
 
         for (String user : users) {
@@ -85,6 +89,7 @@ public class Application {
         }
 
         // 딜러 카드 추가로 받기
+        // <--- 5. 딜러에게 알맞는 카드를 주는 행위 --->
         int dealerScore = calculateWithBonus(dealerCard);
         while (dealerScore <= 16) {
             System.out.println();
@@ -100,6 +105,7 @@ public class Application {
         }
 
         // 최중 카드 출력
+        // <--- 6. 유저에게 화면을 출력하는 책임 --->
         System.out.println(
             String.format("%s 카드: %s = 결과: %d", dealerName, String.join(", ", dealerCard.keySet()),
                 calculateWithBonus(dealerCard)));
@@ -112,6 +118,7 @@ public class Application {
         }
 
         // 최종 승패 출력
+        // <--- 7. 승, 패를 판단하는 책임 --->
         int finalDealerCardSum = calculateWithBonus(dealerNameAndCard.get(dealerName));
         if (finalDealerCardSum > 21) {
             finalDealerCardSum = 0;
@@ -152,6 +159,7 @@ public class Application {
         }
     }
 
+    // <--- 8. 보너스 점수를 고려하여 카드들의 합을 계산하는 로직 --->
     private static int calculateWithBonus(Map<String, Integer> cards) {
         Integer originScore = calculateScore(cards);
         boolean hasAce = cards.keySet().stream()
@@ -164,12 +172,14 @@ public class Application {
         return originScore;
     }
 
+    // <--- 9. 보너스 점수 없이 카드 그대로의 합을 계산하는 로직 --->
     private static Integer calculateScore(Map<String, Integer> userCards) {
         return userCards.values().stream()
             .reduce(Integer::sum)
             .orElseThrow(() -> new IllegalArgumentException("빈 카드는 계산할 수 없습니다."));
     }
 
+    // <--- 3.1 대상에게 실질적으로 카드를 주는 로직 --->
     private static Map<String, Integer> distributeCard(Map<String, Integer> shuffledCards,
                                                        List<String> cardNames,
                                                        Map<String, Integer> cards) {
@@ -178,4 +188,19 @@ public class Application {
         cards.put(cardName, cardValue);
         return cards;
     }
+
+    /*
+    1. 유저의 이름을 입력 받는 책임
+    2. 랜덤한 카드를 만드는 책임
+    3. 유저와 딜러에게 카드를 배분하는 책임
+        3.1 대상에게 카드를 주는 책임
+    4. 유저의 의사에 따라 유저에게 카드를 주는 책임
+    5. 딜러에게 알맞는 카드를 주는 책임
+    6. 유저에게 화면을 출력하는 책임
+    7. 승, 패를 판단하는 책임
+    8. 보너스 점수를 고려하여 카드들의 합을 계산하는 로직
+    9. 보너스 점수 없이 카드 그대로의 합을 계산하는 로직
+
+    --> 요구 사항을 이런 책임 단위로 정리하는 것이 좋다.
+     */
 }
