@@ -10,10 +10,7 @@ public class Participant {
     private final Result result;
 
     public Participant() {
-        this.name = new ParticipantName("딜러");
-        this.cardList = new CardList();
-        this.score = new Score();
-        this.result = new Result();
+        this("딜러");
     }
     public Participant(String name) {
         this.name = new ParticipantName(name);
