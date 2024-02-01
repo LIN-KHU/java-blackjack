@@ -10,7 +10,7 @@ public class PlayerNameList {
     public PlayerNameList(String str) {
         try {
             if (str.isBlank()) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("공백으로만 이뤄지지 않은 한 명 이상의 이름이 입력되어야 합니다.");
             }
         }
         catch (IllegalArgumentException ex) {

@@ -23,7 +23,7 @@ public class InputView {
     private void checkCommand(char command) {
         try {
             if (command != 'y' && command != 'n') {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("입력값은 y 또는 n이어야만 합니다.");
             }
         }
         catch (IllegalArgumentException ex) {
