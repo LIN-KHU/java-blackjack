@@ -8,7 +8,6 @@ import java.util.List;
 public class CardList {
 
     private List<Card> cardList;
-    private int score;
 
     public CardList() {
         this.cardList = new ArrayList<Card>();

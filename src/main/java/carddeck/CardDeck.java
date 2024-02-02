@@ -1,6 +1,7 @@
 package domain.carddeck;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -24,15 +25,14 @@ public class CardDeck {
                 this.cardDeck.add(card);
             }
         }
+        Collections.shuffle(this.cardDeck);
     }
 
-    public Card getCardRandomly() {
-        Random random = new Random();
-        int randomIndex = random.nextInt(this.cardDeck.size());
-        Card randomCard = this.cardDeck.get(randomIndex);
+    public Card getCard() {
 
-        this.cardDeck.remove(randomIndex);
+        Card card = this.cardDeck.get(0);
+        this.cardDeck.remove(0);
 
-        return randomCard;
+        return card;
     }
 }
