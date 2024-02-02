@@ -1,4 +1,4 @@
-package view.inputview;
+package view;
 
 import constants.Constant;
 
