@@ -50,6 +50,14 @@ public class OutputView {
             System.out.println(player.getName() + ": " + player.getGameResult());
         }
     }
+
+//    public void printFinalReward(Dealer dealer, List<Player> playerList){
+//        System.out.println("\n" + FINAL_REWARD );
+//        System.out.println("딜러: " + dealer.getFinalReward());
+//        for(Player player: playerList){
+//            System.out.println(player.getName() + ": " + player.getFinalReward());
+//        }
+//    }
     public void printSumCardNumberOver() {
         System.out.println(SUM_CARD_NUMBER_OVER);
     }

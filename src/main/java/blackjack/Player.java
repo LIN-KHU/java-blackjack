@@ -10,6 +10,8 @@ public class Player {
     //private HashMap<String, Integer> cardList = new HashMap<>();
     private Cards cards = new Cards(new HashMap<>());
     private String gameResult;
+    private int bettingAmount;
+    private Reward reward = new Reward();
 
     public Player(String name) {
         this.name = name;
@@ -36,5 +38,13 @@ public class Player {
 
     public int getSumCardNumber() {
         return cards.getSumCardNumber();
+    }
+    public Cards getCards() {return cards;}
+    public int getBettingAmount() {
+        return bettingAmount;
+    }
+
+    public void setBettingAmount(int bettingAmount) {
+        this.bettingAmount = bettingAmount;
     }
 }

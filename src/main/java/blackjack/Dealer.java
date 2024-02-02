@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Dealer {
     private Cards cards = new Cards(new HashMap<>());
+    private String resultState;
+    private int finalReward = 0;
+    private GameResult gameResult = new GameResult();
 
     public String getCardListToString(){
         return cards.getCardNameListToString();

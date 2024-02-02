@@ -20,6 +20,7 @@ public class Blackjack {
 
     public void startGame() {
         getPlayerName();
+//        setBettingAmount();
         initializeCard();
         printPlayerCard();
         playerChooseStayOrHit();
@@ -33,6 +34,12 @@ public class Blackjack {
         this.playerList.addAll(playerList);
 
     }
+
+//    private void setBettingAmount(){
+//        for(Player player : playerList){
+//            player.setBettingAmount(inputView.readPlayerBettingAmount(player));
+//        }
+//    }
 
     private void initializeCard() {
         outputView.giveCardMsg(playerList);

@@ -24,4 +24,9 @@ public class InputView {
     public String readPlayerStayOrHitState() {
         return Console.readLine();
     }
+
+    public int readPlayerBettingAmount(Player player) {
+        outputView.printPlayerBettingAmount(player);
+        return Integer.parseInt(Console.readLine());
+    }
 }

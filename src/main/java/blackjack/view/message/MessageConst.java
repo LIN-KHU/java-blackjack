@@ -10,6 +10,11 @@ public class MessageConst {
     public static final String FINAL_WINNER = "##최종승패";
     public static final String WIN = "승";
     public static final String LOSE = "패";
+    public static final String TIE = "무승부";
+    public static final String BLACKJACK = "블랙잭";
+    public static final String BUST = "버스트";
     public static final String SUM_CARD_NUMBER_OVER = "카드 숫자의 합이 21을 초과하였습니다.\n";
+    public static final String PLAYER_BET_AMOUNT_MSG = "의 배팅 금액은?";
+    public static final String FINAL_REWARD = "## 최종수익";
 
 }
