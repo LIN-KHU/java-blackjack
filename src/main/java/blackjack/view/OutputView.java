@@ -40,11 +40,10 @@ public class OutputView {
         for (Player player : playerList) {
             printPlayerResult(player);
         }
-        System.out.println("\n" + FINAL_WINNER + "\n");
-        ;
     }
 
     public void printGameWinner(int win, int lose, List<Player> playerList) {
+        System.out.println("\n" + FINAL_WINNER);
         System.out.println("딜러: " + win + "승 " + lose + "패");
         for(Player player: playerList){
             System.out.println(player.getName() + ": " + player.getGameResult());
@@ -71,10 +70,15 @@ public class OutputView {
     }
 
     public void printDealerResult(Dealer dealer){
-        System.out.println("딜러 카드: " + dealer.getCardListToString() + " - 결과: "+dealer.getSumCardNumber());
+        System.out.println("딜러 카드: " + dealer.getCardListToString() + " - 결과: "+dealer.calculateCardSum());
     }
 
     public void printPlayerResult(Player player) {
-        System.out.println(player.getName() + "카드: " + player.getCardNameListToString() + " - 결과: " + player.getSumCardNumber());
+        System.out.println(player.getName() + "카드: " + player.getCardNameListToString() + " - 결과: " + player.calculateCardSum());
+    }
+
+
+    public void printPlayerBettingAmount(Player player) {
+        System.out.println(player.getName() + PLAYER_BET_AMOUNT_MSG);
     }
 }
