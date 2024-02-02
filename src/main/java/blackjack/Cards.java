@@ -34,4 +34,19 @@ public class Cards {
         List<String> cardNameList = getCardNameList();
         return String.join(",", cardNameList);
     }
+
+    public String compareValue(Cards cards){
+        if(calculateGapCardNumber() < cards.calculateGapCardNumber()){
+            return WIN;
+        } else if(calculateGapCardNumber() == cards.calculateGapCardNumber()){
+            return TIE;
+        } else return LOSE;
+    }
+    private int calculateGapCardNumber() {
+        if(calculateCardSum() > 21) {
+            return calculateCardSum() - 21;
+        } else if(calculateCardSum() == 21) {
+            return 0;
+        } else return 21 - calculateCardSum();
+    }
 }
