@@ -14,24 +14,24 @@ public class Dealer {
         return cards.getCardNameListToString();
     }
 
-    public void getCard(HashMap<String, Integer> card){
-        cards.getCards(card);
+    public void setCards(HashMap<String, Integer> card){
+        cards.setCards(card);
     }
 
-    public int getSumCardNumber() {
+    public int calculateCardSum() {
         List<String> cardNameList = cards.getCardNameList();
         /**
          * 모르겠다아
          * */
-        for(String cardName: cardNameList){
-            if(cardName.contains("A")){
-                if(Math.abs(21 - getSumCardNumber()) > Math.abs(21 - getSumCardNumber() +10)){
+        for (String cardName : cardNameList) {
+            if (cardName.contains("A")) {
+                if (Math.abs(21 - calculateCardSum()) > Math.abs(21 - calculateCardSum() + 10)) {
                     //cardList.replace(cardName, 11);
                 }
             }
         }
 
-        return cards.getSumCardNumber();
+        return cards.calculateCardSum();
     }
 
 }

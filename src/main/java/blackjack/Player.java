@@ -32,12 +32,12 @@ public class Player {
         return this.name;
     }
 
-    public void getCard(HashMap<String, Integer> card) {
-        cards.getCards(card);
+    public void giveCard(HashMap<String, Integer> card) {
+        cards.setCards(card);
     }
 
-    public int getSumCardNumber() {
-        return cards.getSumCardNumber();
+    public int calculateCardSum() {
+        return cards.calculateCardSum();
     }
     public Cards getCards() {return cards;}
     public int getBettingAmount() {

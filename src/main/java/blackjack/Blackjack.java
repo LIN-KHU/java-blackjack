@@ -16,7 +16,11 @@ public class Blackjack {
     List<Player> playerList = new ArrayList<>();
 
     Dealer dealer = new Dealer();
-    Card card = new Card();
+    CardGenerator cardGenerator = new CardGenerator();
+    GameResult gameResult = new GameResult();
+
+    private static final String Y = "y";
+    private static final String N = "n";
 
     public void startGame() {
         getPlayerName();
@@ -29,7 +33,6 @@ public class Blackjack {
     }
 
     private void getPlayerName() {
-        outputView.startGameMsg();
         List<Player> playerList = inputView.readPlayerName();
         this.playerList.addAll(playerList);
 
@@ -44,9 +47,9 @@ public class Blackjack {
     private void initializeCard() {
         outputView.giveCardMsg(playerList);
         for (int i = 0; i < 2; i++) {
-            dealer.getCard(card.getCard());
+            dealer.setCards(cardGenerator.getCard());
             for (Player player : playerList) {
-                player.getCard(card.getCard());
+                player.giveCard(cardGenerator.getCard());
             }
         }
     }
@@ -86,9 +89,9 @@ public class Blackjack {
     }
 
     private void dealerGetCard() {
-        if (dealer.getSumCardNumber() < 17) {
+        if (dealer.calculateCardSum() < 17) {
             outputView.printDealerGetMoreCardMsg();
-            dealer.getCard(card.getCard());
+            dealer.setCards(cardGenerator.getCard());
         }
     }
 
@@ -98,13 +101,13 @@ public class Blackjack {
     }
 
     private void getWinner(Dealer dealer, List<Player> playerList) {
-        int dealerResult = dealer.getSumCardNumber();
+        int dealerResult = dealer.calculateCardSum();
         int dealerResultNum = Math.abs(21 - dealerResult);
         int dealerWin = 0;
         int dealerLose = 0;
 
         for (Player player : playerList) {
-            int playerResultNum = Math.abs(21 - player.getSumCardNumber());
+            int playerResultNum = Math.abs(21 - player.calculateCardSum());
             if (dealerResultNum > playerResultNum) {
                 player.setGameResult(WIN);
                 dealerLose++;
