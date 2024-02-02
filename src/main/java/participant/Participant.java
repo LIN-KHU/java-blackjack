@@ -1,20 +1,29 @@
-package domain.participant;
+package participant;
+
+import carddeck.Card;
+
+import java.util.List;
 
 public class Participant {
-    private String name;
+
+    private Name name;
     private CardList cardList;
 
-    public Participant(String name) {
+    public Participant(Name name) {
         this.name = name;
         this.cardList = new CardList();
     }
 
-    public String getName() {
-        return this.name;
+    public void receiveCard(Card card) {
+        this.cardList.addCard(card);
     }
 
-    public CardList getCardList() {
-        return this.cardList;
+    public String getName() {
+        return this.name.getName();
+    }
+
+    public List<Card> getCardList() {
+        return this.cardList.getCardList();
     }
 
 }

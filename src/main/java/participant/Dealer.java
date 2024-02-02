@@ -1,8 +1,10 @@
-package domain.participant;
+package participant;
 
 public class Dealer extends Participant{
 
     public Dealer() {
-        super("딜러");
+        super(new Name("딜러"));
     }
+
+
 }

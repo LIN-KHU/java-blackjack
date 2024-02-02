@@ -1,6 +1,6 @@
-package domain.participant;
+package participant;
 
-import domain.carddeck.Card;
+import carddeck.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +21,4 @@ public class CardList {
         return this.cardList;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public int getScore() {
-        return this.score;
-    }
 }
