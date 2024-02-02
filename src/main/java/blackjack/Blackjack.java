@@ -6,7 +6,7 @@ import blackjack.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static blackjack.message.MessageConst.*;
+import static blackjack.view.message.MessageConst.*;
 
 public class Blackjack {
 
@@ -62,29 +62,33 @@ public class Blackjack {
     }
 
     private void playerChooseStayOrHit() {
-
-        for (int i = 0; i < playerList.size(); i++) {
-            Player player = playerList.get(i);
-            while (true) {
+        for (Player player : playerList) {
+            boolean state = true;
+            while (state) {
                 outputView.stayOrHitMsg(player);
                 String playerStayOrHitState = inputView.readPlayerStayOrHitState();
-
-                if (playerStayOrHitState.equals("y")) {
-                    player.getCard(cardGenerator.getCard());
-                    outputView.printPlayerCard(player);
-                    if(player.getSumCardNumber() < 22){
-                        i--;
-                    } else {
-                        outputView.printSumCardNumberOver();
-                    }
-                    break;
-                } else if (playerStayOrHitState.equals("n")) {
-                    outputView.printPlayerCard(player);
-                    break;
-                } else {
-                    outputView.printStateInputErrorMsg();
-                }
+                state = stayOrHit(player, playerStayOrHitState);
             }
+        }
+    }
+
+    private Boolean stayOrHit(Player player, String playerStayOrHitState){
+
+        if (playerStayOrHitState.equals(Y)) {
+            player.giveCard(cardGenerator.getCard());
+            outputView.printPlayerCard(player);
+            if(player.calculateCardSum() < 22){
+                return true;
+            } else {
+                outputView.printSumCardNumberOver();
+            }
+            return false;
+        } else if (playerStayOrHitState.equals(N)) {
+            outputView.printPlayerCard(player);
+            return false;
+        } else {
+            outputView.printStateInputErrorMsg();
+            return true;
         }
     }
 
