@@ -1,4 +1,4 @@
-package domain.carddeck;
+package carddeck;
 
 public class Card {
 
@@ -12,7 +12,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return this.cardRank.getValue() + this.cardSuit.getValue();
+        return this.cardRank.getRank() + this.cardSuit.getValue();
     }
 
     public CardSuit getCardSuit() {

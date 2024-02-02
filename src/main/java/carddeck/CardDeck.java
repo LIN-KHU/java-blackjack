@@ -1,19 +1,19 @@
-package domain.carddeck;
+package carddeck;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class CardDeck {
 
-    List<Card> cardDeck;
+    private List<Card> cardDeck;
 
     public CardDeck() {
-        generateCardDeck();
+        initializeCardDeck();
+        shuffleCardDeck();
     }
 
-    private void generateCardDeck() {
+    private void initializeCardDeck() {
         CardSuit[] suits = CardSuit.values();
         CardRank[] ranks = CardRank.values();
 
@@ -25,14 +25,18 @@ public class CardDeck {
                 this.cardDeck.add(card);
             }
         }
+    }
+
+    private void shuffleCardDeck() {
         Collections.shuffle(this.cardDeck);
     }
 
-    public Card getCard() {
+    public Card drawCard() {
+        if (this.cardDeck.isEmpty()) {
+            throw new IllegalArgumentException("카드덱이 비어 있습니다.");
+        }
 
-        Card card = this.cardDeck.get(0);
-        this.cardDeck.remove(0);
-
-        return card;
+        return this.cardDeck.remove(0);
     }
+
 }
