@@ -1,13 +1,10 @@
 package blackjack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Player {
 
     private String name;
-    //private HashMap<String, Integer> cardList = new HashMap<>();
     private Cards cards = new Cards(new HashMap<>());
     private String gameResult;
     private int bettingAmount;

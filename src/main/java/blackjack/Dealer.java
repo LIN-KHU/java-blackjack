@@ -1,8 +1,10 @@
 package blackjack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static blackjack.view.message.MessageConst.LOSE;
+import static blackjack.view.message.MessageConst.WIN;
 
 public class Dealer {
     private Cards cards = new Cards(new HashMap<>());
@@ -32,6 +34,19 @@ public class Dealer {
         }
 
         return cards.calculateCardSum();
+    }
+
+    public GameResult calculateResult(List<Player> players) {
+        for (Player player : players) {
+            String compareValue = cards.compareValue(player.getCards());
+            if (compareValue.equals(WIN)) {
+                gameResult.setDealerWinCount(1);
+
+            } else if(compareValue.equals(LOSE)){
+               gameResult.setDealerLoseCount(1);
+            }
+        }
+        return gameResult;
     }
 
 }
