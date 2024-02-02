@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static blackjack.view.message.MessageConst.*;
+
 public class Cards {
 
     private HashMap<String, Integer> cardList = new HashMap<>();
@@ -12,15 +14,16 @@ public class Cards {
         this.cardList = cardList;
     }
 
-    public void getCards(HashMap<String, Integer> card){
+    public void setCards(HashMap<String, Integer> card){
         cardList.putAll(card);
     }
+    public HashMap<String, Integer> getCards() {return cardList;}
 
     public List<String> getCardNameList() {
         return new ArrayList<>(cardList.keySet());
     }
 
-    public int getSumCardNumber() {
+    public int calculateCardSum() {
         int sum = 0;
         List<Integer> cardNumberList = new ArrayList<>(cardList.values());
 
