@@ -1,4 +1,4 @@
-package view.outputview;
+package view;
 
 import carddeck.Card;
 import participant.Dealer;
