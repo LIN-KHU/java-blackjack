@@ -10,7 +10,10 @@ import java.util.List;
 
 public class InputView {
 
+    OutputView outputView = new OutputView();
+
     public List<Player> readPlayerName() {
+        outputView.startGameMsg();
         String player = Console.readLine();
         List<String> playerNameList = Arrays.asList(player.split(","));
         List<Player> playerList = new ArrayList<>();
