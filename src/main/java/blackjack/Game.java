@@ -46,15 +46,6 @@ public class Game {
         dealer.calculateScore();
         for (Participant player : playerList.getPlayerList()) {
             player.calculateScore();
-            checkPlayerAce(player);
-        }
-    }
-
-    private void checkPlayerAce(Participant player) {
-        for (Card card : player.getCardList()) {
-            if (card.checkScoreIfAce() && player.getScore() > 21) {
-                player.setScore(player.getScore() - 10);
-            }
         }
     }
 

@@ -21,6 +21,9 @@ public class Score {
         this.score = 0;
         for (Card card : cardList.getCardList()) {
             this.score += checkCardScore(card);
+            if (card.checkScoreIfAce() && score < 11) {
+                score += 10;
+            }
         }
     }
 
@@ -33,7 +36,7 @@ public class Score {
 
     public int getIfNotNumeric(Card card) {
         if (card.checkScoreIfAce()) {
-            return 11;
+            return 1;
         }
         return 10;
     }
