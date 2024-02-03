@@ -1,10 +1,9 @@
-package blackjack;
+package blackjack.model.Participant;
 
-public class CardName {
-
+public class ParticipantName {
     private final String name;
 
-    public CardName(String name) {
+    public ParticipantName(String name) {
         this.name = name;
     }
 

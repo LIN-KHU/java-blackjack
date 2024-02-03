@@ -1,8 +1,10 @@
 package blackjack.controller;
 
-import blackjack.Deck;
-import blackjack.Participant;
-import blackjack.PlayerList;
+import blackjack.model.Card.Deck;
+import blackjack.model.Game.Game;
+import blackjack.model.Participant.Participant;
+import blackjack.model.Participant.PlayerList;
+import blackjack.model.Participant.PlayerNameList;
 import blackjack.view.InputView;
 import blackjack.view.OutputView;
 
@@ -10,55 +12,79 @@ public class GameController {
 
     private final InputView input;
     private final OutputView output;
+    private Game game;
 
     public GameController(InputView input, OutputView output) {
         this.input = input;
         this.output = output;
     }
-
-    public void DrewNewCard(Participant player, Deck deck) {
-        while (true){
-            output.printAskIfDrawNewCardMessage(player);
-            if (input.readCommand() == 'n') {
-                break;
+    public void start() {
+        initializeGame();
+        doGame();
+        result();
+    }
+    private void initializeGame() {
+        this.game = new Game(inputPlayer());
+        game.setInitialCard();
+        output.printCardSharedMessage(game.getPlayerList());
+        output.printDealerInitialCardList(game.getDealer());
+        output.printPlayersInitialCardList(game.getPlayerList());
+    }
+    private PlayerList inputPlayer() {
+        output.printInputPlayerNameMessage();
+        PlayerNameList playerNameList = input.readPlayerName();
+        return new PlayerList(playerNameList);
+    }
+    public void doGame() {
+        for (Participant player : game.getPlayerList()) {
+            while (askPlayerIsExit(player)){
+                game.getNewCard(player);
+                output.printPlayerCardListWithName(player);
+                output.printNewLine();
             }
-            player.getNewCard(deck);
-            printPlayerCardList(player);
+            output.printPlayerCardListWithName(player);
+            output.printNewLine();
         }
-        printPlayerCardList(player);
     }
-
-    private void printPlayerCardList(Participant player) {
-        output.printPlayerCardList(player);
-        output.printNewLine();
+    private boolean askPlayerIsExit(Participant player) {
+        output.printAskIfDrawNewCardMessage(player);
+        return (input.readCommand() == 'y');
     }
-    public void printScore(Participant dealer, PlayerList playerList) {
+    private void result() {
+        checkDealer();
+        game.calculateScore();
+        game.getResult();
+        printScore(game.getDealer());
+        printResult(game.getDealer());
+    }
+    public void checkDealer() {
+        if (game.isDealerGetNewCard()) {
+            output.printDealerGetNewCardMessage();
+        }
+    }
+    public void printScore(Participant dealer) {
         output.printDealerResultCardList(dealer);
         output.printScore(dealer.getScore());
-        for (Participant player : playerList.getPlayerList()) {
-            output.printPlayerCardList(player);
+        for (Participant player : game.getPlayerList()) {
+            output.printPlayerCardListWithName(player);
             output.printScore(player.getScore());
         }
-    }
-
-    public void printResult(Participant dealer, PlayerList playerList) {
         output.printNewLine();
-        output.printDealerResult(dealer, playerList.size() - dealer.getWin());
-        for (Participant player : playerList.getPlayerList()) {
-            checkIfPlayerWin(player);
-            checkIfPlayerLose(player);
+    }
+
+    public void printResult(Participant dealer) {
+        output.printDealerResult(dealer, game.getPlayerList().size() - dealer.getWinCount());
+        for (Participant player : game.getPlayerList()) {
+            printPlayerResult(player);
         }
     }
 
-    private void checkIfPlayerWin(Participant player) {
-        if (player.getWin() == 1) {
+    private void printPlayerResult(Participant player) {
+        if (game.checkPlayerResult(player)) {
             output.printPlayerWinResult(player);
+            return;
         }
+        output.printPlayerLoseResult(player);
     }
 
-    private void checkIfPlayerLose(Participant player) {
-        if (player.getWin() != 1) {
-            output.printPlayerLoseResult(player);
-        }
-    }
 }

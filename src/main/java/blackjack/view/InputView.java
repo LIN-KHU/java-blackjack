@@ -1,6 +1,6 @@
 package blackjack.view;
 
-import blackjack.PlayerNameList;
+import blackjack.model.Participant.PlayerNameList;
 
 import java.util.*;
 

@@ -1,10 +1,10 @@
-package blackjack;
+package blackjack.model.Card;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CardList {
-    private List<Card> cardList;
+    private final List<Card> cardList;
 
     public CardList() {
         this.cardList = new ArrayList<Card>();

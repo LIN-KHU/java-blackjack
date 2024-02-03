@@ -1,4 +1,10 @@
-package blackjack;
+package blackjack.model.Participant;
+
+import blackjack.model.Card.Card;
+import blackjack.model.Card.CardList;
+import blackjack.model.Card.Deck;
+import blackjack.model.Game.Result;
+import blackjack.model.Game.Score;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +29,6 @@ public class Participant {
         return name.getName();
     }
 
-    public List<Card> getCardList() {
-        return cardList.getCardList();
-    }
-
     public List<String> getCardNameList() {
         List<String> carNameList = new ArrayList<String>();
         for (Card card : cardList.getCardList()) {
@@ -43,15 +45,10 @@ public class Participant {
     public void calculateScore() {
         score.calculate(cardList);
     }
-
-    public void setScore(int number) {
-        score.setScore(number);
-    }
     public int getScore() {
         return score.getScore();
     }
-
-    public int getWin() { return result.getWin(); }
-    public void setWin() { result.setWin();}
+    public int getWinCount() { return result.getWinCount(); }
+    public void addWinCount() { result.win();}
 
 }

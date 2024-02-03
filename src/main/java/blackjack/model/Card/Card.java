@@ -1,4 +1,4 @@
-package blackjack;
+package blackjack.model.Card;
 
 public class Card {
 

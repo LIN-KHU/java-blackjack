@@ -1,6 +1,7 @@
-package blackjack;
+package blackjack.model.Game;
 
-import java.util.List;
+import blackjack.model.Card.Card;
+import blackjack.model.Card.CardList;
 
 public class Score {
 
