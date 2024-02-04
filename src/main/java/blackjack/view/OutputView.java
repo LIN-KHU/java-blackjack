@@ -19,7 +19,7 @@ public class OutputView {
         System.out.println("\n딜러와 " + String.join(", ", playerNameList) + "에게 2장을 나누었습니다.");
     }
     public void printDealerInitialCardList(Participant participant) {
-        System.out.println(participant.getName()+": "+String.join(", ", participant.getCardNameList()));
+        System.out.println(participant.getName()+": "+participant.getCardNameList().get(0));
     }
     public void printPlayersInitialCardList(List<Participant> playerList) {
         for (Participant player : playerList) {
