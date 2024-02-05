@@ -50,8 +50,37 @@ public class Application {
         //게임 종료 - 결과 출력, 기준 : 한 게임 끝나면
         OutputView.printResultSum(dealer, playerList);
 
-        //최종 승패
+        //최종 승패 - dealer는 각 player별로 비교하여 승패 기록, 각 player은 딜러와 다른 player와 비교, 그리고 player가 1등이면 승 아니면 패
+        //딜러 승패 계산
+        int dealerWin = 0;
+        int dealerLose = 0;
+        for (Player player : playerList.getPlayerList()) {
+            if (dealer.getCardList().getSum() > player.getCardList().getSum()) {
+                dealerWin += 1;
+            }
+            if (dealer.getCardList().getSum() < player.getCardList().getSum()) {
+                dealerLose += 1;
+            }
+        }
+        OutputView.printFinalWin(dealerWin, dealerLose);
 
-
+        //플레이어 승패 계산
+        for (Player player: playerList.getPlayerList()) {
+            boolean isWin = false;
+            int playerSum = player.getCardList().getSum();
+            for (Player otherPlayer : playerList.getPlayerList()) {
+                if (playerSum < otherPlayer.getCardList().getSum() || playerSum < dealer.getCardList().getSum()) {
+                    isWin = false;
+                    OutputView.printFinalPlayerResult(player, isWin);
+                    break;
+                }
+                if (player.getCardList().getSum() > otherPlayer.getCardList().getSum()) {
+                    isWin = true;
+                }
+            }
+            if (isWin && playerSum > dealer.getCardList().getSum()) {
+                OutputView.printFinalPlayerResult(player,isWin);
+            }
+        }
     }
 }

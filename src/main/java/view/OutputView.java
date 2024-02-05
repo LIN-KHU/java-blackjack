@@ -45,4 +45,26 @@ public class OutputView {
         System.out.println("");
     }
 
+    public static void printFinalWin(int dealerWin, int dealerLose){
+        System.out.println("## 최종 승패");
+        if (dealerWin == 0) {
+            System.out.println("딜러: " + dealerLose + "패");
+        }
+        if (dealerLose == 0) {
+            System.out.println("딜러: " + dealerWin + "승");
+        }
+        if (dealerWin != 0 && dealerLose != 0) {
+            System.out.println("딜러: " + dealerWin + "승 " + dealerLose + "패");
+        }
+    }
+
+    public static void printFinalPlayerResult(Player player, boolean isWin) {
+        if(isWin) {
+            System.out.println(player.getName() + ": " + "승");
+        }
+        if(!isWin) {
+            System.out.println(player.getName() + ": " + "패");
+        }
+    }
+
 }
