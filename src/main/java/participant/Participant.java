@@ -14,6 +14,10 @@ public class Participant {
         this.cardList = new CardList();
     }
 
+    public boolean isDealer() {
+        return false;
+    }
+
     public void receiveCard(Card card) {
         this.cardList.addCard(card);
     }

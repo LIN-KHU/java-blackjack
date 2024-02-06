@@ -6,5 +6,9 @@ public class Dealer extends Participant{
         super(new Name("딜러"));
     }
 
+    @Override
+    public boolean isDealer() {
+        return true;
+    }
 
 }

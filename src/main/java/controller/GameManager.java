@@ -24,20 +24,8 @@ public class GameManager {
     }
 
     public void gameStart() {
-        List<Player> playerList = getPlayerList();
-
-        List<Participant> participants = new ArrayList<Participant>();
-        Dealer dealer = new Dealer();
-        participants.add(dealer);
-        for (Player player : playerList) {
-            participants.add((Participant) player);
-        }
-
-        List<String> playerNameList = new ArrayList<String>();
-        for (Player player : playerList) {
-            playerNameList.add(player.getName());
-        }
-        outputView.printInitialCardDistributionMessage(playerNameList);
+        List<Participant> participants = getParticipants();
+        Dealer dealer = getDealer(participants);
 
         this.blackJack = new BlackJack(participants);
         for (Participant participant : participants) {
@@ -47,7 +35,7 @@ public class GameManager {
         outputView.printEmptyLine();
 
         for (Participant participant : participants) {
-            if (participant instanceof Player) {
+            if (!participant.isDealer()) {
                 askForAdditionCard(participant);
             }
         }
@@ -69,7 +57,7 @@ public class GameManager {
         DealerWinChecker dealerWinChecker = new DealerWinChecker(dealer);
         HashMap<String, String> playerResult = new HashMap<>();
         for (Participant participant : participants) {
-            if (participant instanceof Player) {
+            if (!participant.isDealer()) {
                 Result result = dealerWinChecker.checkDealerWin((Player) participant);
                 playerResult.put(participant.getName(), result.getValue());
             }
@@ -82,6 +70,33 @@ public class GameManager {
 
         outputView.printFinalResult(dealerResult, playerResult);
 
+    }
+
+    private List<Participant> getParticipants() {
+        List<Player> playerList = getPlayerList();
+
+        List<Participant> participants = new ArrayList<Participant>();
+        Dealer dealer = new Dealer();
+        participants.add(dealer);
+        for (Player player : playerList) {
+            participants.add((Participant) player);
+        }
+
+        List<String> playerNameList = new ArrayList<String>();
+        for (Player player : playerList) {
+            playerNameList.add(player.getName());
+        }
+        outputView.printInitialCardDistributionMessage(playerNameList);
+        return participants;
+    }
+
+    private Dealer getDealer(List<Participant> participants) {
+        for (Participant participant : participants) {
+            if (participant.isDealer()) {
+                return (Dealer) participant;
+            }
+        }
+        return null;
     }
 
     private List<Player> getPlayerList() {
