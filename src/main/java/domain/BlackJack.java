@@ -39,7 +39,7 @@ public class BlackJack {
     }
 
     public boolean isDealerAboveThreshold(Dealer dealer) {
-        int score = ScoreCalculator.calculateScore(dealer);
+        int score = dealer.getScore();
         if (score <= DEALER_THRESHOLD) {
             distributeCard(dealer);
             return true;

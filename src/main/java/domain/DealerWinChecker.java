@@ -14,13 +14,13 @@ public class DealerWinChecker {
     private int pushNum;
 
     public DealerWinChecker(Dealer dealer) {
-        this.dealerScore = ScoreCalculator.calculateScore(dealer);
+        this.dealerScore = dealer.getScore();
         this.winNum = 0;
         this.loseNum = 0;
     }
 
     public Result checkDealerWin(Player player) {
-        int playerScore = ScoreCalculator.calculateScore(player);
+        int playerScore = player.getScore();
         boolean dealerBust = checkBust(this.dealerScore);
         boolean playerBust = checkBust(playerScore);
         if (dealerBust && playerBust) {

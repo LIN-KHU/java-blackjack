@@ -4,13 +4,11 @@ import constants.Constant;
 import constants.Result;
 import domain.BlackJack;
 import domain.DealerWinChecker;
-import domain.ScoreCalculator;
 import participant.*;
 import view.InputView;
 import view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -61,7 +59,7 @@ public class GameManager {
         }
 
         for (Participant participant : participants) {
-            int score = ScoreCalculator.calculateScore(participant);
+            int score = participant.getScore();
             outputView.printScore(participant, score);
         }
 
