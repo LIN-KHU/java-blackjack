@@ -17,6 +17,9 @@ public class InputView {
 
     public List<String> inputPlayerName() {
         String playerNameStr = this.sc.nextLine();
+        if (playerNameStr.isBlank()) {
+            throw new IllegalArgumentException("값을 입력하시오.");
+        }
         List<String> list = Arrays.asList(playerNameStr.split(","));
         List<String> playerNameList = new ArrayList<String>();
         for (String name : list) {
