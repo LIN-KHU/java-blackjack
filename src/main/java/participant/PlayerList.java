@@ -12,6 +12,12 @@ public class PlayerList {
         this.playerList = generatePlayerList(nameList);
     }
 
+    private void IsNameEqualsDealer(String name) {
+        if (name.equals("딜러")) {
+            throw new IllegalArgumentException("딜러 이름 사용 불가");
+        }
+    }
+
     private List<String> hasDuplicateNames(List<String> playerNameList) {
         List<String> processedNameList = new ArrayList<String>();
         for (String name : playerNameList) {
@@ -25,8 +31,9 @@ public class PlayerList {
     }
 
     private List<Player> generatePlayerList(List<String> processedNameList) {
-        List<Player> playerList= new ArrayList<Player>();
+        List<Player> playerList = new ArrayList<Player>();
         for (String name : processedNameList) {
+            IsNameEqualsDealer(name);
             playerList.add(new Player(new Name(name)));
         }
         return playerList;

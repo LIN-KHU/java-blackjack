@@ -6,15 +6,8 @@ public class Name {
 
     public Name(String name) {
         String trimmedName = name.trim();
-        IsNameEqualsDealer(name);
         IsNameEmpty(name);
         this.name = name;
-    }
-
-    private void IsNameEqualsDealer(String name) {
-        if (name.equals("딜러")) {
-            throw new IllegalArgumentException("딜러 이름 사용 불가");
-        }
     }
 
     private void IsNameEmpty(String name) {
