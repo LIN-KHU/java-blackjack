@@ -10,6 +10,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,20 +26,22 @@ public class GameManager {
     }
 
     public void gameStart() {
-        List<Participant> participants = new ArrayList<Participant>();
+        List<Player> playerList = getPlayerList();
 
+        List<Participant> participants = new ArrayList<Participant>();
         Dealer dealer = new Dealer();
         participants.add(dealer);
-
-        List<String> playerNameList = getPlayerNameList();
-        for (String name : playerNameList) {
-            Player player = new Player(new Name(name));
-            participants.add(player);
+        for (Player player : playerList) {
+            participants.add((Participant) player);
         }
 
-        this.blackJack = new BlackJack(participants);
+        List<String> playerNameList = new ArrayList<String>();
+        for (Player player : playerList) {
+            playerNameList.add(player.getName());
+        }
         outputView.printInitialCardDistributionMessage(playerNameList);
 
+        this.blackJack = new BlackJack(participants);
         for (Participant participant : participants) {
             outputView.printParticipantCardList(participant);
         }
@@ -82,17 +85,16 @@ public class GameManager {
 
     }
 
-    private List<String> getPlayerNameList() {
-        outputView.printInputPlayerNameMessage();
-        List<String> names = inputView.inputPlayerName();
-        NameChecker nameChecker = new NameChecker(names);
+    private List<Player> getPlayerList() {
         try {
-            nameChecker.check();
+            outputView.printInputPlayerNameMessage();
+            List<String> nameList = inputView.inputPlayerName();
+            PlayerList playerList = new PlayerList(nameList);
+            return playerList.getPlayerList();
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            return getPlayerNameList();
+            System.out.println(e.getMessage());
+            return getPlayerList();
         }
-        return names;
     }
 
     private void askForAdditionCard(Participant participant) {
