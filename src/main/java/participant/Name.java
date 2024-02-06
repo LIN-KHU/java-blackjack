@@ -6,17 +6,9 @@ public class Name {
 
     public Name(String name) {
         String trimmedName = name.trim();
-        validateName(trimmedName);
-    }
-
-    private void validateName(String name) {
-        try {
-            IsNameEqualsDealer(name);
-            IsNameEmpty(name);
-            this.name = name;
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        IsNameEqualsDealer(name);
+        IsNameEmpty(name);
+        this.name = name;
     }
 
     private void IsNameEqualsDealer(String name) {
