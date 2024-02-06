@@ -7,6 +7,7 @@ import participant.Player;
 
 public class DealerWinChecker {
 
+    private final int TARGET_SCORE = 21;
     private int dealerScore;
     private int winNum;
     private int loseNum;
@@ -48,7 +49,7 @@ public class DealerWinChecker {
     }
 
     private boolean checkBust(int score) {
-        if (score > Constant.TARGET_SCORE) {
+        if (score > TARGET_SCORE) {
             return true;
         }
         return false;
