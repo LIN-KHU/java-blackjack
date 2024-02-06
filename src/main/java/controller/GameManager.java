@@ -55,6 +55,7 @@ public class GameManager {
         outputView.printEmptyLine();
 
         if (blackJack.isDealerAboveThreshold(dealer)) {
+            blackJack.distributeCard(dealer);
             outputView.printDealerGetOneMoreCard();
         }
 
