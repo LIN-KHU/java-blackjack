@@ -22,6 +22,10 @@ public class Participant {
         return this.name.getName();
     }
 
+    public int getScore() {
+        return this.cardList.calculateScore();
+    }
+
     public List<Card> getCardList() {
         return this.cardList.getCardList();
     }
