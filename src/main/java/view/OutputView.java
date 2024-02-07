@@ -10,7 +10,7 @@ public class OutputView {
         System.out.println("게임에 참여할 사람의 이름을 입력하세요.(쉼표 기준으로 분리)");
     }
 
-    public static void printCardAssignment(PlayerList playerList){
+    public static void printCardAssignment(PlayerList playerList) {
         System.out.println("딜러와 " + playerList.toString() + "에게 2장을 나누었습니다.");
     }
 
@@ -33,6 +33,7 @@ public class OutputView {
     public static void printDrawDealerCardMessage() {
         System.out.println("\n딜러는 16이하라 한장의 카드를 더 받았습니다.\n");
     }
+
     public static void printNotDrawDealerCardMessage() {
         System.out.println("\n딜러는 16초과라 카드를 뽑지 않습니다.\n");
     }
@@ -45,7 +46,7 @@ public class OutputView {
         System.out.println("");
     }
 
-    public static void printFinalWin(int dealerWin, int dealerLose){
+    public static void printFinalWin(int dealerWin, int dealerLose) {
         System.out.println("## 최종 승패");
         if (dealerWin == 0) {
             System.out.println("딜러: " + dealerLose + "패");
@@ -59,10 +60,10 @@ public class OutputView {
     }
 
     public static void printFinalPlayerResult(Player player, boolean isWin) {
-        if(isWin) {
+        if (isWin) {
             System.out.println(player.getName() + ": " + "승");
         }
-        if(!isWin) {
+        if (!isWin) {
             System.out.println(player.getName() + ": " + "패");
         }
     }
